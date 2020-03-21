@@ -49,5 +49,6 @@ csvtool transpose <(grep "China" $CONFIRMED ) |tail -n +5 |tr "," "+"|bc >china.
 
 gnuplot -p <(sed -e "s/country1/$COUNTRY1/g" -e "s/country2/$COUNTRY2/g" -e "s/country3/$COUNTRY3/g" -e "s/country4/$COUNTRY4/g" -e "s/country5/$COUNTRY5/g" -e "s/country6/$COUNTRY6/g" plot.gpl)
 
-convert -density 300 plot.eps plot.png
+convert -density 300 plot-1.eps plot-1.png
+convert -density 300 plot-2.eps plot-2.png
 

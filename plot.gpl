@@ -90,7 +90,7 @@ set key t l
 set xrange [28-m_max:0]
 set logscale y
 set term post eps color enhanced size 3,5
-set out "plot.eps"
+set out "plot-1.eps"
 
 COL_Number = 1
 ROW_Number = 3
@@ -136,7 +136,10 @@ p "country1.csv" u ($0-m_max):(($2-($3+$4))/$5) title "country1" w linespoints l
   "country5.csv" u ($0-m_max):(($2-($3+$4))/$5) title "country5" w linespoints ls 5,\
   "country6.csv" u ($0-m_max):(($2-($3+$4))/$5) title "country6" w linespoints ls 6
 unset multiplot
+set out
 
+
+set out "plot-2.eps"
 set xrange [-25:25]
 set yrange [0:40000]
 set title "Logisitc curve"
