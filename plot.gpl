@@ -89,7 +89,7 @@ unset table
 set key t l    
 set xrange [28-m_max:0]
 set logscale y
-set term post eps color enhanced size 4,6
+set term post eps color enhanced size 3,5
 set out "plot.eps"
 
 COL_Number = 1
