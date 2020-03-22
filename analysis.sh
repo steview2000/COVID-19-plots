@@ -53,3 +53,4 @@ convert -density 300 plot-1.eps plot-1.png
 convert -density 300 plot-2.eps plot-2.png
 convert -density 300 plot-3.eps plot-3.png
 
+
