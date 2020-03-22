@@ -89,11 +89,11 @@ unset table
 set key t l    
 set xrange [28-m_max:0]
 set logscale y
-set term post eps color enhanced size 3,5
+set term post eps color enhanced size 3,4
 set out "plot-1.eps"
 
 COL_Number = 1
-ROW_Number = 3
+ROW_Number = 2
 
 left_margin=0.15
 load 'multi.gnu'
@@ -101,20 +101,24 @@ load 'multi.gnu'
 set multiplot
 set yrange [50:100000]
 set format x ""
+set format y "10^{%L}"
 set ylabel "Cumulative infection"
 @MARGINS_1
-p "country1.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country1" w p ls 1,exp(f1(x+m_max)) notitle w l ls 1,\
-  "country2.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country2" w p ls 2,exp(f2(x+m_max)) notitle w l ls 2,\
-  "country3.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country3" w p ls 3,exp(f3(x+m_max)) notitle w l ls 3,\
-  "country4.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country4" w p ls 4,exp(f4(x+m_max)) notitle w l ls 4,\
-  "country5.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country5" w p ls 5,exp(f5(x+m_max)) notitle w l ls 5,\
-  "country6.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country6" w p ls 6,exp(f6(x+m_max)) notitle w l ls 6
+p "country1.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country1" w p ls 1,x>(m1-m_max) ? exp(f1(x+m_max)):1/0 notitle w l ls 1,\
+  "country2.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country2" w p ls 2,x>(m2-m_max) ? exp(f2(x+m_max)):1/0 notitle w l ls 2,\
+  "country3.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country3" w p ls 3,x>(m3-m_max) ? exp(f3(x+m_max)):1/0 notitle w l ls 3,\
+  "country4.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country4" w p ls 4,x>(m4-m_max) ? exp(f4(x+m_max)):1/0 notitle w l ls 4,\
+  "country5.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country5" w p ls 5,x>(m5-m_max) ? exp(f5(x+m_max)):1/0 notitle w l ls 5,\
+  "country6.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country6" w p ls 6,x>(m6-m_max) ? exp(f6(x+m_max)):1/0 notitle w l ls 6
 
 #unset logscale y
 set key b l
 set yrange [0.01:*]
 set ylabel "relative infection rates"
 unset logscale y
+set format x "%g"
+set format y "%g"
+set xlabel "Days ago"
 @MARGINS_2
 p x>(m1-m_max) ? df1(x+m_max): 1/0 title "country1" w l ls 1,\
   x>(m2-m_max) ? df2(x+m_max): 1/0 title "country2" w l ls 2,\
@@ -123,23 +127,23 @@ p x>(m1-m_max) ? df1(x+m_max): 1/0 title "country1" w l ls 1,\
   x>(m5-m_max) ? df5(x+m_max): 1/0 title "country5" w l ls 5,\
   x>(m6-m_max) ? df6(x+m_max): 1/0 title "country6" w l ls 6
 
-set format x "%g"
-set xlabel "Days ago"
 set ylabel "currently sick (ppm)"
 unset logscale y
 set key t l
-@MARGINS_3
+unset multiplot
+set out
+
+######################################################
+set out "plot-2.eps"
 p "country1.csv" u ($0-m_max):(($2-($3+$4))/$5) title "country1" w linespoints ls 1,\
   "country2.csv" u ($0-m_max):(($2-($3+$4))/$5) title "country2" w linespoints ls 2,\
   "country3.csv" u ($0-m_max):(($2-($3+$4))/$5) title "country3" w linespoints ls 3,\
   "country4.csv" u ($0-m_max):(($2-($3+$4))/$5) title "country4" w linespoints ls 4,\
   "country5.csv" u ($0-m_max):(($2-($3+$4))/$5) title "country5" w linespoints ls 5,\
   "country6.csv" u ($0-m_max):(($2-($3+$4))/$5) title "country6" w linespoints ls 6
-unset multiplot
-set out
 
 
-set out "plot-2.eps"
+set out "plot-3.eps"
 set xrange [-25:25]
 set yrange [0:40]
 #set title "Logisitc curve"

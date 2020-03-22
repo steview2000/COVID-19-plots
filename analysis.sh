@@ -3,10 +3,10 @@
 
 export COUNTRY1=germany
 export COUNTRY2=italy
-export COUNTRY3=uk
-export COUNTRY4=malaysia
-export COUNTRY5=spain
-export COUNTRY6=korea
+export COUNTRY3=korea
+export COUNTRY4=spain
+export COUNTRY5=uk
+export COUNTRY6=malaysia
 
 export CONFIRMED="$HOME/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv"
 export DEATH="$HOME/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv"
