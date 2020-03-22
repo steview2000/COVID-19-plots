@@ -15,7 +15,7 @@ reservoir of infectable people,  this number should grow nearly exponentially. T
 the data on a linear x-axis and a logarithmic y-axis. In this way an exponential growth of the
 infections shows up as straight lines. 
 
-![Exponential development](plot-1.png|width=640)
+![Exponential development](plot-1.png)
 
 We see in the top figure, the infection data for 6 different countries. Most of them do not show
 straight lines over the entire range. The relative infection rate can be calculated by dividing the
@@ -30,8 +30,8 @@ steadily.
 
 ## Logisitc curve
 
-![Logistic Curve](plot-3.png|width=640)
+![Logistic Curve](plot-3.png)
 
-![Logistic Curve](plot-2.png|width=640)
+![Logistic Curve](plot-2.png)
 
 
