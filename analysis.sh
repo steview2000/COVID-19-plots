@@ -51,4 +51,5 @@ gnuplot -p <(sed -e "s/country1/$COUNTRY1/g" -e "s/country2/$COUNTRY2/g" -e "s/c
 
 convert -density 300 plot-1.eps plot-1.png
 convert -density 300 plot-2.eps plot-2.png
+convert -density 300 plot-3.eps plot-3.png
 
