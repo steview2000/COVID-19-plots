@@ -134,6 +134,9 @@ unset multiplot
 set out
 
 ######################################################
+set term post eps color enhanced size 3,2.5
+set tmargin -1
+set bmargin -1
 set out "plot-2.eps"
 p "country1.csv" u ($0-m_max):(($2-($3+$4))/$5) title "country1" w linespoints ls 1,\
   "country2.csv" u ($0-m_max):(($2-($3+$4))/$5) title "country2" w linespoints ls 2,\
@@ -141,8 +144,9 @@ p "country1.csv" u ($0-m_max):(($2-($3+$4))/$5) title "country1" w linespoints l
   "country4.csv" u ($0-m_max):(($2-($3+$4))/$5) title "country4" w linespoints ls 4,\
   "country5.csv" u ($0-m_max):(($2-($3+$4))/$5) title "country5" w linespoints ls 5,\
   "country6.csv" u ($0-m_max):(($2-($3+$4))/$5) title "country6" w linespoints ls 6
+set out
 
-
+set term post eps color enhanced size 3,4
 set out "plot-3.eps"
 set xrange [-25:25]
 set yrange [0:80]
