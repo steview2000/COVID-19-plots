@@ -6,7 +6,7 @@ export COUNTRY2=italy
 export COUNTRY3=korea
 export COUNTRY4=spain
 export COUNTRY5=uk
-export COUNTRY6=malaysia
+export COUNTRY6=us
 
 export CONFIRMED="$HOME/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv"
 export DEATH="$HOME/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv"
@@ -17,15 +17,27 @@ function create_header {
 }
 
 function create_confirmed {
-	grep "$1" $CONFIRMED | tr "," "\n" | tail -n +5 
+	if [ "$1" = "us" ];then
+		csvtool transpose <(grep "US" $CONFIRMED ) |tail -n +5 |tr "," "+"|bc
+	else
+		grep "$1" $CONFIRMED | tr "," "\n" | tail -n +5 
+	fi
 }
 
 function create_recovered {
-	grep "$1" $RECOVERED | tr "," "\n" | tail -n +5 
+	if [ "$1" = "us" ];then
+		csvtool transpose <(grep "US" $RECOVERED ) |tail -n +5 |tr "," "+"|bc
+	else
+		grep "$1" $RECOVERED | tr "," "\n" | tail -n +5 
+	fi
 }
 
 function create_deaths {
-	grep "$1" $DEATH | tr "," "\n" | tail -n +5 
+	if [ "$1" = "us" ];then
+		csvtool transpose <(grep "US" $DEATH ) |tail -n +5 |tr "," "+"|bc
+	else
+		grep "$1" $DEATH | tr "," "\n" | tail -n +5 
+	fi
 }
 
 function create_all_col {
@@ -42,9 +54,9 @@ create_all_col Korea 2 | awk '{print $1,$2,$3,$4,77}'> korea.csv
 create_all_col Malaysia 1 | awk '{print $1,$2,$3,$4,33}'> malaysia.csv
 create_all_col Iran 1 | awk '{print $1,$2,$3,$4,83}'> iran.csv
 create_all_col "United Kingdom,United Kingdom" 1 | awk '{print $1,$2,$3,$4,67}'> uk.csv
+create_all_col us 1 | awk '{print $1,$2,$3,$4,328}'> us.csv
 
 # special treatment for the US
-csvtool transpose <(grep "US" $CONFIRMED ) |tail -n +5 |tr "," "+"|bc >us.csv
 csvtool transpose <(grep "China" $CONFIRMED ) |tail -n +5 |tr "," "+"|bc >china.csv
 
 gnuplot -p <(sed -e "s/country1/$COUNTRY1/g" -e "s/country2/$COUNTRY2/g" -e "s/country3/$COUNTRY3/g" -e "s/country4/$COUNTRY4/g" -e "s/country5/$COUNTRY5/g" -e "s/country6/$COUNTRY6/g" plot.gpl)
