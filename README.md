@@ -2,9 +2,9 @@
 
 Here is some regularly updated analysis of the COVID-19 outbreak.
 
-The data are from: https://github.com/CSSEGISandData/COVID-19
+Data from: https://github.com/CSSEGISandData/COVID-19
 
-**UPDATED:  Sat 23 Mar 2020 09:52:32 PM CET**
+ *UPDATED: Mon 23 Mar 2020 11:10:29 PM CET*
 
 ## The growth rate of infection
 
@@ -28,10 +28,24 @@ trends. However, one can clearly see, how the infection rates in Italy decrease 
 steadily.
 
 
-## Logisitc curve
+
+## Logisitc function
+The number of infected agents during a pandemic often follow a [logistic function](https://en.wikipedia.org/wiki/Logistic_function).
+The number of infected agents increases initially exponentially, as long as most of the population
+is not infected yet. When the infection rate increases, it will be more difficult for the virus to
+find fresh (not infected) hosts and the slope of the curve decreases. The curve reaches its
+inflection point when roughly half of the population is infected and after finally reaches
+asymptotically a constant value, i.e., uninfected hosts are so rare that the virus can no longer
+spread. 
+
+The COVID-19 pandemic is however different, as the infection rates are not so much controlled by the
+progress of the infections, but rather by the measures the societies are taken to slow down the
+outbreak. Nevertheless, fitting a logisitic function to the data might help to detect changes in the
+spreading rate and hence whether measures are working.
 
 ![Logistic Curve](plot-3.png)
 
+## Currently sick people per million inhabitants.
 ![Logistic Curve](plot-2.png)
 
 

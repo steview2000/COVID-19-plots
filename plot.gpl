@@ -102,7 +102,7 @@ set multiplot
 set yrange [50:100000]
 set format x ""
 set format y "10^{%L}"
-set ylabel "Cumulative infection"
+set ylabel "cumulative infections"
 @MARGINS_1
 p "country1.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country1" w p ls 1,x>(m1-m_max) ? exp(f1(x+m_max)):1/0 notitle w l ls 1,\
   "country2.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country2" w p ls 2,x>(m2-m_max) ? exp(f2(x+m_max)):1/0 notitle w l ls 2,\
@@ -145,7 +145,7 @@ p "country1.csv" u ($0-m_max):(($2-($3+$4))/$5) title "country1" w linespoints l
 
 set out "plot-3.eps"
 set xrange [-25:25]
-set yrange [0:40]
+set yrange [0:80]
 #set title "Logisitc curve"
 h_gap=0.1
 load 'multi.gnu'
@@ -186,13 +186,15 @@ p dl1(x+x01)*1e-3 title "country1" w l ls 1,\
   'country6.csv' u ($0-x06):(dl6($0)*1e-3) notitle "country6" w p ls 6
 
 print ""
-print sprintf("Infection rates doubled in :\n")
-print sprintf("country1: %.2f days",log(2)/df1(m_max))
-print sprintf("country2: %.2f days",log(2)/df2(m_max))
-print sprintf("country3: %.2f days",log(2)/df3(m_max))
-print sprintf("country4: %.2f days",log(2)/df4(m_max))
-print sprintf("country5: %.2f days",log(2)/df5(m_max))
-print sprintf("country6: %.2f days",log(2)/df6(m_max))
+print sprintf("*Infection rates doubled in :*\n")
+print sprintf("|Country | days until doubling of infections| ")
+print sprintf("| --- | --- |")
+print sprintf("|country1: |%.2f days|",log(2)/df1(m_max))
+print sprintf("|country2: |%.2f days|",log(2)/df2(m_max))
+print sprintf("|country3: |%.2f days|",log(2)/df3(m_max))
+print sprintf("|country4: |%.2f days|",log(2)/df4(m_max))
+print sprintf("|country5: |%.2f days|",log(2)/df5(m_max))
+print sprintf("|country6: |%.2f days|",log(2)/df6(m_max))
 print ""
 print sprintf("Max expected infections:\n")
 print sprintf("country1: %d (total), %.1f ppm",L1,L1/pop1)
