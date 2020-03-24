@@ -34,7 +34,7 @@ function create_confirmed {
 			csvtool col 1,203 <(csvtool transpose $CONFIRMED) |tail -n +5 
 			;;
 		korea) 
-			csvtool col 1,145 <(csvtool transpose $CONFIRMED) |tail -n +6 
+			csvtool col 1,145 <(csvtool transpose $CONFIRMED) |tail -n +5 
 			;;
 	esac
 }
@@ -62,7 +62,7 @@ function create_deaths {
 			csvtool col 203 <(csvtool transpose $DEATH) |tail -n +5 
 			;;
 		korea) 
-			csvtool col 145 <(csvtool transpose $DEATH) |tail -n +6 
+			csvtool col 145 <(csvtool transpose $DEATH) |tail -n +5 
 			;;
 	esac
 }

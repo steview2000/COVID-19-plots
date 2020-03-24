@@ -1,5 +1,8 @@
 #!/usr/bin/gnuplot -persist
 
+set fit errorvariables
+
+# the polinomials
 f1(x) = (a1+b1*x+1e-2*c1*x**2+1e-4*d1*x**3+1e-6*e1*x**4)
 f2(x) = (a2+b2*x+1e-2*c2*x**2+1e-4*d2*x**3+1e-6*e2*x**4)
 f3(x) = (a3+b3*x+1e-2*c3*x**2+1e-4*d3*x**3+1e-6*e3*x**4)
@@ -14,6 +17,7 @@ c1 = c2 = c3 = c4 = c5 = c6 = c7 = c8 = -9  ;
 d1 = d2 = d3 = d4 = d5 = d6 = d7 = d8 = -0.645507 ;
 e1 = e2 = e3 = e4 = e5 = e6 = e7 = e8 = 0.1 ;
 
+# their derivatev, the rates
 df1(x) = (b1+2*1e-2*c1*x+3*1e-4*d1*x**2+4*1e-6*e1*x**3)
 df2(x) = (b2+2*1e-2*c2*x+3*1e-4*d2*x**2+4*1e-6*e2*x**3)
 df3(x) = (b3+2*1e-2*c3*x+3*1e-4*d3*x**2+4*1e-6*e3*x**3)
@@ -23,6 +27,20 @@ df6(x) = (b6+2*1e-2*c6*x+3*1e-4*d6*x**2+4*1e-6*e6*x**3)
 df7(x) = (b7+2*1e-2*c7*x+3*1e-4*d7*x**2+4*1e-6*e7*x**3)
 df8(x) = (b8+2*1e-2*c8*x+3*1e-4*d8*x**2+4*1e-6*e8*x**3)
 
+# error estimates:
+sdf1(x) = sqrt(((2*1e-2*c1_err*x)**2 + (6*1e-4*d1*x*d1_err)**2 + (12*1e-6*e1*e1_err*x**2)**2)/4)
+sdf2(x) = sqrt(((2*1e-2*c2_err*x)**2 + (6*1e-4*d2*x*d2_err)**2 + (12*1e-6*e2*e2_err*x**2)**2)/4)
+sdf3(x) = sqrt(((2*1e-2*c3_err*x)**2 + (6*1e-4*d3*x*d3_err)**2 + (12*1e-6*e3*e3_err*x**2)**2)/4)
+sdf4(x) = sqrt(((2*1e-2*c4_err*x)**2 + (6*1e-4*d4*x*d4_err)**2 + (12*1e-6*e4*e4_err*x**2)**2)/4)
+sdf5(x) = sqrt(((2*1e-2*c5_err*x)**2 + (6*1e-4*d5*x*d5_err)**2 + (12*1e-6*e5*e5_err*x**2)**2)/4)
+sdf6(x) = sqrt(((2*1e-2*c6_err*x)**2 + (6*1e-4*d6*x*d6_err)**2 + (12*1e-6*e6*e6_err*x**2)**2)/4)
+
+ssdf1(x) = sqrt( (log(2)*(2*1e-2*c1+6*1e-4*d1*x+12*1e-6*e1*x**2)*sdf1(x)/(df1(x))**2)**2 )
+ssdf2(x) = sqrt( (log(2)*(2*1e-2*c2+6*1e-4*d2*x+12*1e-6*e2*x**2)*sdf2(x)/(df2(x))**2)**2 )
+ssdf3(x) = sqrt( (log(2)*(2*1e-2*c3+6*1e-4*d3*x+12*1e-6*e3*x**2)*sdf3(x)/(df3(x))**2)**2 )
+ssdf4(x) = sqrt( (log(2)*(2*1e-2*c4+6*1e-4*d4*x+12*1e-6*e4*x**2)*sdf4(x)/(df4(x))**2)**2 )
+ssdf5(x) = sqrt( (log(2)*(2*1e-2*c5+6*1e-4*d5*x+12*1e-6*e5*x**2)*sdf5(x)/(df5(x))**2)**2 )
+ssdf6(x) = sqrt( (log(2)*(2*1e-2*c6+6*1e-4*d6*x+12*1e-6*e6*x**2)*sdf6(x)/(df6(x))**2)**2 )
 
 set xrange [*:*]
 
@@ -34,7 +52,7 @@ e3              = -4.35154
 
 fit f1(x) "country1.csv" u 0:($2>50 ? log($2) :1/0) via a1,b1,c1,d1,e1
 fit f2(x) "country2.csv" u 0:($2>50 ? log($2) :1/0) via a2,b2,c2,d2,e2
-#fit f3(x) "country3.csv" u 0:($2>50 ? log($2) :1/0) via e3,b3,c3,d3,a3
+fit f3(x) "country3.csv" u 0:($2>50 ? log($2) :1/0) via e3,b3,c3,d3,a3
 fit f4(x) "country4.csv" u 0:($2>50 ? log($2) :1/0) via a4,b4,c4,d4,e4
 fit f5(x) "country5.csv" u 0:($2>50 ? log($2) :1/0) via a5,b5,c5,d5,e5
 fit f6(x) "country6.csv" u 0:($2>50 ? log($2) :1/0) via a6,b6,c6,d6,e6
@@ -93,7 +111,7 @@ unset table
 unset table
 
 set key t l    
-set xrange [28-m_max:0]
+set xrange [28-m_max:1]
 set logscale y
 set term post eps color enhanced size 3,4
 set out "plot-1.eps"
@@ -212,11 +230,11 @@ print ""
 print "define(_logistic_table,"
 print sprintf("*Max expected total infections:*")
 print sprintf("|Country | total | in persons per million | ")
-print sprintf("| --- | ---- | ---- | ")
-print sprintf("|country1| %d | %.1f| ",L1,L1/pop1)
-print sprintf("|country2| %d | %.1f| ",L2,L2/pop2)
-print sprintf("|country3| %d | %.1f| ",L3,L3/pop3)
-print sprintf("|country4| %d | %.1f| ",L4,L4/pop4)
-print sprintf("|country5| %d | %.1f| ",L5,L5/pop5)
-print sprintf("|country6| %d | %.1f| ",L6,L6/pop6)
+print sprintf("| --- | ---- | ---- |")
+print sprintf("|country1| %d +/- %.0f| %.1f +/- %.1f|",L1,L1_err,L1/pop1,L1_err/pop1)
+print sprintf("|country2| %d +/- %.0f| %.1f +/- %.1f|",L2,L2_err,L2/pop2,L2_err/pop2)
+print sprintf("|country3| %d +/- %.0f| %.1f +/- %.1f|",L3,L3_err,L3/pop3,L3_err/pop3)
+print sprintf("|country4| %d +/- %.0f| %.1f +/- %.1f|",L4,L4_err,L4/pop4,L4_err/pop4)
+print sprintf("|country5| %d +/- %.0f| %.1f +/- %.1f|",L5,L5_err,L5/pop5,L5_err/pop5)
+print sprintf("|country6| %d +/- %.0f| %.1f +/- %.1f|",L6,L6_err,L6/pop6,L6_err/pop6)
 print ")"
