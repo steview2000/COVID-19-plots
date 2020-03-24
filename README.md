@@ -1,10 +1,13 @@
+
+
+
 # COVID-19-plots
 
 Here is some regularly updated analysis of the COVID-19 outbreak.
 
 Data from: https://github.com/CSSEGISandData/COVID-19
 
- *UPDATED: Mon 23 Mar 2020 11:10:29 PM CET*
+ *UPDATED: Tue 24 Mar 2020 10:21:34 AM CET*
 
 ## The growth rate of infection
 
@@ -27,6 +30,16 @@ the data, since small fluctuations in the data get picked up by the fits and thu
 trends. However, one can clearly see, how the infection rates in Italy decrease albeit slowly,
 steadily.
 
+*Infection rates doubled in :*
+|Country | days until doubling of infections| 
+| --- | --- |
+|germany: |4.15 days|
+|italy: |4.69 days|
+|korea: |10.97 days|
+|spain: |34.59 days|
+|uk: |3.27 days|
+|malaysia: |-19.14 days|
+
 
 
 ## Logisitc function
@@ -48,4 +61,13 @@ spreading rate and hence whether measures are working.
 ## Currently sick people per million inhabitants.
 ![Logistic Curve](plot-2.png)
 
+*Max expected infections:*
+|Country | total | in persons per million | 
+| --- | ---- | ---- | 
+germany| 32542 | 392.1| 
+italy| 95556 | 1592.6| 
+korea| 8488 | 110.2| 
+spain| 40171 | 854.7| 
+uk| 9500 | 287.9| 
+malaysia| 1622 | 49.2| 
 
