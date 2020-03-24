@@ -7,7 +7,7 @@ Here is some regularly updated analysis of the COVID-19 outbreak.
 
 Data from: https://github.com/CSSEGISandData/COVID-19
 
- *UPDATED: Tue 24 Mar 2020 10:21:34 AM CET*
+ *UPDATED: Tue 24 Mar 2020 11:40:09 AM CET*
 
 ## The growth rate of infection
 
@@ -33,12 +33,12 @@ steadily.
 *Infection rates doubled in :*
 |Country | days until doubling of infections| 
 | --- | --- |
-|germany: |4.15 days|
-|italy: |4.69 days|
-|korea: |10.97 days|
-|spain: |34.59 days|
-|uk: |3.27 days|
-|malaysia: |-19.14 days|
+|germany: |8.57 days|
+|italy: |13.19 days|
+|korea: |23.31 days|
+|spain: |5.19 days|
+|uk: |8.22 days|
+|us: |1.84 days|
 
 
 
@@ -58,16 +58,13 @@ spreading rate and hence whether measures are working.
 
 ![Logistic Curve](plot-3.png)
 
-## Currently sick people per million inhabitants.
-![Logistic Curve](plot-2.png)
-
-*Max expected infections:*
+*Max expected total infections:*
 |Country | total | in persons per million | 
 | --- | ---- | ---- | 
-germany| 32542 | 392.1| 
-italy| 95556 | 1592.6| 
-korea| 8488 | 110.2| 
-spain| 40171 | 854.7| 
-uk| 9500 | 287.9| 
-malaysia| 1622 | 49.2| 
+|germany| 43837 | 528.2| 
+|italy| 115854 | 1930.9| 
+|korea| 7811 | 101.4| 
+|spain| 70589 | 1501.9| 
+|uk| 16954 | 51.7| 
+|us| 143869 | 438.6| 
 

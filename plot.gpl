@@ -1,37 +1,43 @@
 #!/usr/bin/gnuplot -persist
 
-f1(x) = (a1+b1*x+1e-2*c1*x**2+1e-5*d1*x**3+1e-6*e1*x**4)
-f2(x) = (a2+b2*x+1e-2*c2*x**2+1e-5*d2*x**3+1e-6*e2*x**4)
-f3(x) = (a3+b3*x+1e-2*c3*x**2+1e-5*d3*x**3+1e-6*e3*x**4)
-f4(x) = (a4+b4*x+1e-2*c4*x**2+1e-5*d4*x**3+1e-6*e4*x**4)
-f5(x) = (a5+b5*x+1e-2*c5*x**2+1e-5*d5*x**3+1e-6*e5*x**4)
-f6(x) = (a6+b6*x+1e-2*c6*x**2+1e-5*d6*x**3+1e-6*e6*x**4)
-f7(x) = (a7+b7*x+1e-2*c7*x**2+1e-5*d7*x**3+1e-6*e7*x**4)
+f1(x) = (a1+b1*x+1e-2*c1*x**2+1e-4*d1*x**3+1e-6*e1*x**4)
+f2(x) = (a2+b2*x+1e-2*c2*x**2+1e-4*d2*x**3+1e-6*e2*x**4)
+f3(x) = (a3+b3*x+1e-2*c3*x**2+1e-4*d3*x**3+1e-6*e3*x**4)
+f4(x) = (a4+b4*x+1e-2*c4*x**2+1e-4*d4*x**3+1e-6*e4*x**4)
+f5(x) = (a5+b5*x+1e-2*c5*x**2+1e-4*d5*x**3+1e-6*e5*x**4)
+f6(x) = (a6+b6*x+1e-2*c6*x**2+1e-4*d6*x**3+1e-6*e6*x**4)
+f7(x) = (a7+b7*x+1e-2*c7*x**2+1e-4*d7*x**3+1e-6*e7*x**4)
 
 a1 = a2 = a3 = a4 = a5 = a6 = a7 = a8 = -73.4712  
 b1 = b2 = b3 = b4 = b5 = b6 = b7 = b8 = 4.60956   
 c1 = c2 = c3 = c4 = c5 = c6 = c7 = c8 = -9  ;     
-d1 = d2 = d3 = d4 = d5 = d6 = d7 = d8 = 0.645507 ;
-e1 = e2 = e3 = e4 = e5 = e6 = e7 = e8 = 0.0 ;
+d1 = d2 = d3 = d4 = d5 = d6 = d7 = d8 = -0.645507 ;
+e1 = e2 = e3 = e4 = e5 = e6 = e7 = e8 = 0.1 ;
 
-df1(x) = (b1+2*1e-2*c1*x+3*1e-5*d1*x**2+4*1e-6*e1*x**3)
-df2(x) = (b2+2*1e-2*c2*x+3*1e-5*d2*x**2+4*1e-6*e2*x**3)
-df3(x) = (b3+2*1e-2*c3*x+3*1e-5*d3*x**2+4*1e-6*e3*x**3)
-df4(x) = (b4+2*1e-2*c4*x+3*1e-5*d4*x**2+4*1e-6*e4*x**3)
-df5(x) = (b5+2*1e-2*c5*x+3*1e-5*d5*x**2+4*1e-6*e5*x**3)
-df6(x) = (b6+2*1e-2*c6*x+3*1e-5*d6*x**2+4*1e-6*e6*x**3)
-df7(x) = (b7+2*1e-2*c7*x+3*1e-5*d7*x**2+4*1e-6*e7*x**3)
-df8(x) = (b8+2*1e-2*c8*x+3*1e-5*d8*x**2+4*1e-6*e8*x**3)
+df1(x) = (b1+2*1e-2*c1*x+3*1e-4*d1*x**2+4*1e-6*e1*x**3)
+df2(x) = (b2+2*1e-2*c2*x+3*1e-4*d2*x**2+4*1e-6*e2*x**3)
+df3(x) = (b3+2*1e-2*c3*x+3*1e-4*d3*x**2+4*1e-6*e3*x**3)
+df4(x) = (b4+2*1e-2*c4*x+3*1e-4*d4*x**2+4*1e-6*e4*x**3)
+df5(x) = (b5+2*1e-2*c5*x+3*1e-4*d5*x**2+4*1e-6*e5*x**3)
+df6(x) = (b6+2*1e-2*c6*x+3*1e-4*d6*x**2+4*1e-6*e6*x**3)
+df7(x) = (b7+2*1e-2*c7*x+3*1e-4*d7*x**2+4*1e-6*e7*x**3)
+df8(x) = (b8+2*1e-2*c8*x+3*1e-4*d8*x**2+4*1e-6*e8*x**3)
 
 
 set xrange [*:*]
 
-fit f1(x) "country1.csv" u 0:($2>50 ? log($2) :1/0) via a1,b1,c1,d1
-fit f2(x) "country2.csv" u 0:($2>50 ? log($2) :1/0) via a2,b2,c2,d2
-fit f3(x) "country3.csv" u 0:($2>50 ? log($2) :1/0) via a3,b3,c3,d3
-fit f4(x) "country4.csv" u 0:($2>50 ? log($2) :1/0) via a4,b4,c4,d4
-fit f5(x) "country5.csv" u 0:($2>50 ? log($2) :1/0) via a5,b5,c5,d5
-fit f6(x) "country6.csv" u 0:($2>50 ? log($2) :1/0) via a6,b6,c6,d6
+a3              = -48.62     
+b3              = 3.9053     
+c3              = -9.81515   
+d3              = 10.7944    
+e3              = -4.35154   
+
+fit f1(x) "country1.csv" u 0:($2>50 ? log($2) :1/0) via a1,b1,c1,d1,e1
+fit f2(x) "country2.csv" u 0:($2>50 ? log($2) :1/0) via a2,b2,c2,d2,e2
+#fit f3(x) "country3.csv" u 0:($2>50 ? log($2) :1/0) via e3,b3,c3,d3,a3
+fit f4(x) "country4.csv" u 0:($2>50 ? log($2) :1/0) via a4,b4,c4,d4,e4
+fit f5(x) "country5.csv" u 0:($2>50 ? log($2) :1/0) via a5,b5,c5,d5,e5
+fit f6(x) "country6.csv" u 0:($2>50 ? log($2) :1/0) via a6,b6,c6,d6,e6
 
 
 l1(x) = L1/(1+exp(-k1*(x-x01)))
@@ -204,7 +210,7 @@ print sprintf("|country6: |%.2f days|",log(2)/df6(m_max))
 print ")"
 print ""
 print "define(_logistic_table,"
-print sprintf("*Max expected infections:*")
+print sprintf("*Max expected total infections:*")
 print sprintf("|Country | total | in persons per million | ")
 print sprintf("| --- | ---- | ---- | ")
 print sprintf("|country1| %d | %.1f| ",L1,L1/pop1)
