@@ -7,7 +7,7 @@ Here is some regularly updated analysis of the COVID-19 outbreak.
 
 Data from: https://github.com/CSSEGISandData/COVID-19
 
- *UPDATED: Wed 25 Mar 2020 08:56:56 AM CET*
+ *UPDATED: Wed 25 Mar 2020 08:58:47 AM CET*
 
 ## The growth rate of infection
 
