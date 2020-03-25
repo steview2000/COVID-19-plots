@@ -219,12 +219,12 @@ print "define(_doubling_table, "
 print sprintf("*Infection rates doubled in :*")
 print sprintf("|Country | days until doubling of infections| ")
 print sprintf("| --- | --- |")
-print sprintf("|country1: |%.2f days|",log(2)/df1(m_max))
-print sprintf("|country2: |%.2f days|",log(2)/df2(m_max))
-print sprintf("|country3: |%.2f days|",log(2)/df3(m_max))
-print sprintf("|country4: |%.2f days|",log(2)/df4(m_max))
-print sprintf("|country5: |%.2f days|",log(2)/df5(m_max))
-print sprintf("|country6: |%.2f days|",log(2)/df6(m_max))
+print sprintf("|country1 |%.2f days|",log(2)/df1(m_max-1))
+print sprintf("|country2 |%.2f days|",log(2)/df2(m_max-1))
+print sprintf("|country3 |%.2f days|",log(2)/df3(m_max-1))
+print sprintf("|country4 |%.2f days|",log(2)/df4(m_max-1))
+print sprintf("|country5 |%.2f days|",log(2)/df5(m_max-1))
+print sprintf("|country6 |%.2f days|",log(2)/df6(m_max-1))
 print ")"
 print ""
 print "define(_logistic_table,"
