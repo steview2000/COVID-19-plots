@@ -7,7 +7,7 @@ Here is some regularly updated analysis of the COVID-19 outbreak.
 
 Data from: https://github.com/CSSEGISandData/COVID-19
 
- *UPDATED: Thu 26 Mar 2020 08:11:01 AM CET*
+ *UPDATED: Thu 26 Mar 2020 09:30:40 AM CET*
 
 ## The growth rate of infection
 
@@ -68,3 +68,7 @@ spreading rate and hence whether measures are working.
 |uk| 23077 +/- 3771| 70.4 +/- 11.5|
 |us| 121920 +/- 6317| 371.7 +/- 19.3|
 
+
+## Currently infected
+
+For the health systems, the number of active cases is also important. Below, we plot the number of normalised by the population of ad given country (in person per millions - ppm).
