@@ -1,5 +1,25 @@
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 733.884
+variance of residuals (reduced chisquare) = WSSR/ndf   : 538586
 
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+L6              = 179619           +/- 1.543e+04    (8.591%)
+k6              = 0.335365         +/- 0.01022      (3.049%)
+x06             = 64.4821          +/- 0.4619       (0.7164%)
 
+correlation matrix of the fit parameters:
+                L6     k6     x06    
+L6              1.000 
+k6             -0.925  1.000 
+x06             0.996 -0.947  1.000 
+Warning: empty y range [83:83], adjusting to [82.17:83.83]
+Warning: empty y range [60:60], adjusting to [59.4:60.6]
+Warning: empty y range [77:77], adjusting to [76.23:77.77]
+Warning: empty y range [47:47], adjusting to [46.53:47.47]
+Warning: empty y range [67:67], adjusting to [66.33:67.67]
+Warning: empty y range [328:328], adjusting to [324.72:331.28]
+Warning: empty y range [328:328], adjusting to [324.72:331.28]
+"/dev/fd/63" line 123: Cannot open script file 'multi.gnu'
 
 # COVID-19-plots
 
@@ -7,7 +27,7 @@ Here is some regularly updated analysis of the COVID-19 outbreak.
 
 Data from: https://github.com/CSSEGISandData/COVID-19
 
- *UPDATED: Thu 26 Mar 2020 09:33:04 AM CET*
+ *UPDATED: Fri 27 Mar 2020 08:05:17 AM CET*
 
 ## The growth rate of infection
 
@@ -30,16 +50,7 @@ the data, since small fluctuations in the data get picked up by the fits and thu
 trends. However, one can clearly see, how the infection rates in Italy decrease albeit slowly,
 steadily.
 
-*Infection rates doubled in :*
-|Country | days until doubling of infections| 
-| --- | --- |
-|germany |8.84 days|
-|italy |13.70 days|
-|korea |36.39 days|
-|spain |4.23 days|
-|uk |5.83 days|
-|us |2.33 days|
-
+_doubling_table
 
 
 ## Logisitc function
@@ -58,16 +69,7 @@ spreading rate and hence whether measures are working.
 
 ![Logistic Curve](plot-3.png)
 
-*Max expected total infections:*
-|Country | total | in persons per million | 
-| --- | ---- | ---- |
-|germany| 52866 +/- 2349| 636.9 +/- 28.3|
-|italy| 112352 +/- 3370| 1872.5 +/- 56.2|
-|korea| 8610 +/- 74| 111.8 +/- 1.0|
-|spain| 124926 +/- 24561| 2658.0 +/- 522.6|
-|uk| 23077 +/- 3771| 70.4 +/- 11.5|
-|us| 121920 +/- 6317| 371.7 +/- 19.3|
-
+_logistic_table
 
 ## Currently infected
 

@@ -10,11 +10,7 @@ export COUNTRY6=us
 
 export CONFIRMED="$HOME/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
 export DEATH="$HOME/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"
-export RECOVERED="$HOME/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv"
-
-function create_header {
-	head -n 1 $CONFIRMED |tr "," "\n"|tail -n +5 
-}
+export RECOVERED="$HOME/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv"
 
 function create_confirmed {
 	case $1 in
@@ -40,7 +36,26 @@ function create_confirmed {
 }
 
 function create_recovered {
-		csvtool col 239 <(csvtool transpose $DEATH) |tail -n +5 
+	case $1 in
+		germany) 
+			csvtool col 115 <(csvtool transpose $RECOVERED) |tail -n +5 
+			;;
+		italy) 
+			csvtool col 133 <(csvtool transpose $RECOVERED) |tail -n +5 
+			;;
+		us) 
+			csvtool col 229 <(csvtool transpose $RECOVERED) |tail -n +5 
+			;;
+		uk) 
+			csvtool col 227 <(csvtool transpose $RECOVERED) |tail -n +5 
+			;;
+		spain) 
+			csvtool col 201 <(csvtool transpose $RECOVERED) |tail -n +5 
+			;;
+		korea) 
+			csvtool col 139 <(csvtool transpose $RECOVERED) |tail -n +5 
+			;;
+	esac
 
 }
 
@@ -68,12 +83,11 @@ function create_deaths {
 }
 
 function create_all_col {
-	paste -d "," <(create_confirmed "$1") <(create_recovered) <(create_deaths "$1")
+	paste -d "," <(create_confirmed "$1") <(create_recovered "$1") <(create_deaths "$1")
 }
 # Create the data file:
-#head -n 1 $CONFIRMED |tr "," "\n"|tail -n +5 >header.csv
 
-#create_all_col germany >germany.csv
+#create_recovered korea
 
 create_all_col germany 1 | awk -F, '{print $1,$2,$3,$4,83}'> germany.csv
 create_all_col italy 1 | awk -F, '{print $1,$2,$3,$4,60}' > italy.csv
