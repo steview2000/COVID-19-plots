@@ -1,25 +1,5 @@
-rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 733.884
-variance of residuals (reduced chisquare) = WSSR/ndf   : 538586
 
-Final set of parameters            Asymptotic Standard Error
-=======================            ==========================
-L6              = 179619           +/- 1.543e+04    (8.591%)
-k6              = 0.335365         +/- 0.01022      (3.049%)
-x06             = 64.4821          +/- 0.4619       (0.7164%)
 
-correlation matrix of the fit parameters:
-                L6     k6     x06    
-L6              1.000 
-k6             -0.925  1.000 
-x06             0.996 -0.947  1.000 
-Warning: empty y range [83:83], adjusting to [82.17:83.83]
-Warning: empty y range [60:60], adjusting to [59.4:60.6]
-Warning: empty y range [77:77], adjusting to [76.23:77.77]
-Warning: empty y range [47:47], adjusting to [46.53:47.47]
-Warning: empty y range [67:67], adjusting to [66.33:67.67]
-Warning: empty y range [328:328], adjusting to [324.72:331.28]
-Warning: empty y range [328:328], adjusting to [324.72:331.28]
-"/dev/fd/63" line 123: Cannot open script file 'multi.gnu'
 
 # COVID-19-plots
 
@@ -27,7 +7,7 @@ Here is some regularly updated analysis of the COVID-19 outbreak.
 
 Data from: https://github.com/CSSEGISandData/COVID-19
 
- *UPDATED: Fri 27 Mar 2020 08:05:17 AM CET*
+ *UPDATED: Fri 27 Mar 2020 11:36:39 AM CET*
 
 ## The growth rate of infection
 
@@ -50,7 +30,16 @@ the data, since small fluctuations in the data get picked up by the fits and thu
 trends. However, one can clearly see, how the infection rates in Italy decrease albeit slowly,
 steadily.
 
-_doubling_table
+*Infection rates doubled in :*
+|Country | days until doubling of infections| 
+| --- | --- |
+|germany |9.46 days|
+|italy |17.05 days|
+|korea |39.31 days|
+|spain |3.92 days|
+|uk |5.77 days|
+|us |2.53 days|
+
 
 
 ## Logisitc function
@@ -69,7 +58,16 @@ spreading rate and hence whether measures are working.
 
 ![Logistic Curve](plot-3.png)
 
-_logistic_table
+*Max expected total infections:*
+|Country | total | in persons per million | 
+| --- | ---- | ---- |
+|germany| 66469 +/- 4678| 800.8 +/- 56.4|
+|italy| 115336 +/- 2878| 1922.3 +/- 48.0|
+|korea| 8667 +/- 77| 112.6 +/- 1.0|
+|spain| 166639 +/- 33941| 3545.5 +/- 722.2|
+|uk| 35715 +/- 7844| 108.9 +/- 23.9|
+|us| 179619 +/- 15430| 547.6 +/- 47.0|
+
 
 ## Currently infected
 
