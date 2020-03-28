@@ -7,7 +7,7 @@ Here is some regularly updated analysis of the COVID-19 outbreak.
 
 Data from: https://github.com/CSSEGISandData/COVID-19
 
- *UPDATED: Fri 27 Mar 2020 09:32:56 PM CET*
+ *UPDATED: Sat 28 Mar 2020 09:25:57 AM CET*
 
 ## The growth rate of infection
 
@@ -33,12 +33,12 @@ steadily.
 *Infection rates doubled in :*
 |Country | days until doubling of infections| 
 | --- | --- |
-|germany |9.46 days|
-|italy |17.05 days|
-|korea |39.31 days|
-|spain |3.92 days|
-|uk |5.77 days|
-|us |2.53 days|
+|germany |9.32 days|
+|italy |21.52 days|
+|korea |44.00 days|
+|spain |3.83 days|
+|uk |5.25 days|
+|us |2.79 days|
 
 
 
@@ -61,12 +61,12 @@ spreading rate and hence whether measures are working.
 *Max expected total infections:*
 |Country | total | in persons per million | 
 | --- | ---- | ---- |
-|germany| 66469 +/- 4678| 800.8 +/- 56.4|
-|italy| 115336 +/- 2878| 1922.3 +/- 48.0|
-|korea| 8667 +/- 77| 112.6 +/- 1.0|
-|spain| 166639 +/- 33941| 3545.5 +/- 722.2|
-|uk| 35715 +/- 7844| 108.9 +/- 23.9|
-|us| 179619 +/- 15430| 547.6 +/- 47.0|
+|germany| 86209 +/- 8307| 1038.7 +/- 100.1|
+|italy| 119250 +/- 2639| 1987.5 +/- 44.0|
+|korea| 8723 +/- 80| 113.3 +/- 1.0|
+|spain| 168202 +/- 23647| 3578.8 +/- 503.1|
+|uk| 99611 +/- 59833| 303.7 +/- 182.4|
+|us| 218383 +/- 16121| 665.8 +/- 49.1|
 
 
 ## Currently infected
