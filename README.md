@@ -7,7 +7,7 @@ Here is some regularly updated analysis of the COVID-19 outbreak.
 
 Data from: https://github.com/CSSEGISandData/COVID-19
 
- *UPDATED: Mon 30 Mar 2020 09:21:15 AM CEST*
+ *UPDATED: Mon 30 Mar 2020 11:25:27 PM CEST*
 
 Data are provided for number of the number of _cumulated infected_, _recovered_ and _deceased_ patients.
 
@@ -24,32 +24,24 @@ the infections mainly occur in a rather small area of a countr. We plot the numb
 ## The growth rate of infection
 
 We first consider the number of infected people. With a constant infection rate and an infinite
-reservoir of infectable people,  this number should grow nearly exponentially. Therefore, we plot
-the data on a linear x-axis and a logarithmic y-axis. In this way an exponential growth of the
-infections shows up as straight lines. 
+reservoir of _infectable_ people. This number should grow initially nearly exponentially without
+proper countermeasures. We plot the data on a linear x-axis and a logarithmic y-axis. In this way an exponential growth of the infections shows up as straight lines. 
 
 ![Exponential development](poly-exp-fit.png)
 
 We see in the top figure, the infection data for 6 different countries. Most of them do not show
-straight lines over the entire range. The relative infection rate can be calculated by dividing the
-daily increase by the number of infections. However, as the data scatter, also these numbers scatter
-significantly and trends are difficult to grasp. Therefore, we fit polynomials of 4th order to the
-logarithm of the infections. The 1st derivative of these polynomials mark the effective
-infection rates and are plotted as solid lines in the lower plot. Note, one should not overinterpret
-the data, since small fluctuations in the data get picked up by the fits and thus show unreal
-trends. However, one can clearly see, how the infection rates in Italy decrease albeit slowly,
-steadily.
+straight lines over the entire range. We calculate the relative infection rate from smoothed and
+interpolated infection data in order to remove the scatter of the data. 
 
 *Infection rates doubled in :*
 |Country | days until doubling of infections| 
 | --- | --- |
-|germany |10.10 days|
-|italy |37.88 days|
-|korea |56.35 days|
-|spain |4.18 days|
-|uk |5.40 days|
-|us |3.55 days|
-
+|germany |7.90 days|
+|italy |11.98 days|
+|korea |57.99 days|
+|spain |7.28 days|
+|uk |4.88 days|
+|us |4.40 days|
 
 
 ## Logisitc function
@@ -79,7 +71,7 @@ increases as data points.
 |italy| 127308 +/- 2380| 2121.8 +/- 39.7|
 |korea| 8847 +/- 88| 114.9 +/- 1.1|
 |spain| 141458 +/- 8200| 3009.8 +/- 174.5|
-|uk| 67644 +/- 12319| 206.2 +/- 37.6|
+|uk| 67644 +/- 12319| 1009.6 +/- 183.9|
 |us| 252724 +/- 9420| 770.5 +/- 28.7|
 
 

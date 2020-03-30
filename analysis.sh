@@ -12,6 +12,8 @@ export CONFIRMED="$HOME/COVID-19/csse_covid_19_data/csse_covid_19_time_series/ti
 export DEATH="$HOME/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"
 export RECOVERED="$HOME/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv"
 
+COL_Number=$(csvtool col 122 <(csvtool transpose $CONFIRMED) |tail -n +5 |wc -l)
+
 function create_confirmed {
 	case $1 in
 		germany) 

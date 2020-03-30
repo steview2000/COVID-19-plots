@@ -43,6 +43,17 @@ ssdf4(x) = sqrt( (log(2)*(2*1e-2*c4+6*1e-4*d4*x+12*1e-6*e4*x**2)*sdf4(x)/(df4(x)
 ssdf5(x) = sqrt( (log(2)*(2*1e-2*c5+6*1e-4*d5*x+12*1e-6*e5*x**2)*sdf5(x)/(df5(x))**2)**2 )
 ssdf6(x) = sqrt( (log(2)*(2*1e-2*c6+6*1e-4*d6*x+12*1e-6*e6*x**2)*sdf6(x)/(df6(x))**2)**2 )
 
+dinc(x) = (vD = (x-old_x), old_x = x, vD)
+
+deriv1(x,y) = (vD1 = 2*(y-old_y1)/((x-old_x1)*(old_y1+y)), old_y1 = y, old_x1 = x, vD1)
+deriv2(x,y) = (vD2 = 2*(y-old_y2)/((x-old_x2)*(old_y2+y)), old_y2 = y, old_x2 = x, vD2)
+deriv3(x,y) = (vD3 = 2*(y-old_y3)/((x-old_x3)*(old_y3+y)), old_y3 = y, old_x3 = x, vD3)
+deriv4(x,y) = (vD4 = 2*(y-old_y4)/((x-old_x4)*(old_y4+y)), old_y4 = y, old_x4 = x, vD4)
+deriv5(x,y) = (vD5 = 2*(y-old_y5)/((x-old_x5)*(old_y5+y)), old_y5 = y, old_x5 = x, vD5)
+deriv6(x,y) = (vD6 = 2*(y-old_y6)/((x-old_x6)*(old_y6+y)), old_y6 = y, old_x6 = x, vD6)
+old_x = old_x1 = old_x2 =old_x3 =old_x4 =old_x5 =old_x6 =NaN
+old_y = old_y1 = old_y2 =old_y3 =old_y4 =old_y5 =old_y6 =NaN
+
 fit f1(x) "country1.csv" u 0:($2>50 ? log($2) :1/0) via a1,b1,c1,d1,e1
 fit f2(x) "country2.csv" u 0:($2>50 ? log($2) :1/0) via a2,b2,c2,d2,e2
 fit f3(x) "country3.csv" u 0:($2>50 ? log($2) :1/0) via e3,b3,c3,d3,a3
@@ -52,45 +63,45 @@ fit f6(x) "country6.csv" u 0:($2>50 ? log($2) :1/0) via a6,b6,c6,d6,e6
 
 
 set xrange [*:*]
-
-
-
+set yrange [*:*]
 set table '/dev/null'
-p "country1.csv" u 0:($2>50 ? ($0) :1/0)
+p "country1.csv" u 5:($2>50 ? ($0) :1/0)
 m1=GPVAL_DATA_Y_MIN
-p "country2.csv" u 0:($2>50 ? ($0) :1/0)
+pop1=GPVAL_DATA_X_MIN
+p "country2.csv" u 5:($2>50 ? ($0) :1/0)
 m2=GPVAL_DATA_Y_MIN
-p "country3.csv" u 0:($2>50 ? ($0) :1/0)
+pop2=GPVAL_DATA_X_MIN
+p "country3.csv" u 5:($2>50 ? ($0) :1/0)
 m3=GPVAL_DATA_Y_MIN
-p "country4.csv" u 0:($2>50 ? ($0) :1/0)
+pop3=GPVAL_DATA_X_MIN
+p "country4.csv" u 5:($2>50 ? ($0) :1/0)
 m4=GPVAL_DATA_Y_MIN
-p "country5.csv" u 0:($2>50 ? ($0) :1/0)
+pop4=GPVAL_DATA_X_MIN
+p "country5.csv" u 5:($2>50 ? ($0) :1/0)
 m5=GPVAL_DATA_Y_MIN
-p "country6.csv" u 0:($2>50 ? ($0) :1/0)
+pop5=GPVAL_DATA_X_MIN
+p "country6.csv" u 5:($2>50 ? ($0) :1/0)
 m6=GPVAL_DATA_Y_MIN
+pop6=GPVAL_DATA_X_MIN
 m_max =GPVAL_DATA_Y_MAX
 
-p "country1.csv" u 0:5 
-pop1=GPVAL_DATA_Y_MIN
-p "country2.csv" u 0:5 
-pop2=GPVAL_DATA_Y_MIN
-p "country3.csv" u 0:5 
-pop3=GPVAL_DATA_Y_MIN
-p "country4.csv" u 0:5 
-pop4=GPVAL_DATA_Y_MIN
-p "country5.csv" u 0:5 
-pop5=GPVAL_DATA_Y_MIN
-p "country6.csv" u 0:5 
-pop5=GPVAL_DATA_Y_MIN
-p "country6.csv" u 0:5 
-pop6=GPVAL_DATA_Y_MIN
-
-unset table
+set table "/tmp/country1.csv"
+p "country1.csv" u 0:(log($2)) smooth bezier
+set table "/tmp/country2.csv"
+p "country2.csv" u 0:(log($2)) smooth bezier
+set table "/tmp/country3.csv"
+p "country3.csv" u 0:(log($2)) smooth bezier
+set table "/tmp/country4.csv"
+p "country4.csv" u 0:(log($2)) smooth bezier
+set table "/tmp/country5.csv"
+p "country5.csv" u 0:(log($2)) smooth bezier
+set table "/tmp/country6.csv"
+p "country6.csv" u 0:(log($2)) smooth bezier
 
 unset table
 
 set key t l    
-set xrange [28-m_max:1]
+set xrange [30-m_max:1]
 set logscale y
 set term post eps color enhanced size 3,4
 set out "poly-exp-fit.eps"
@@ -103,19 +114,20 @@ load 'multi.gnu'
 
 set multiplot
 set yrange [50:200000]
+set xrange [-40:2]
 set format x ""
 set format y "10^{%L}"
 set ylabel "cumulative infections"
 @MARGINS_1
-p "country1.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country1" w p ls 1,x>(m1-m_max) ? exp(f1(x+m_max)):1/0 notitle w l ls 1,\
-  "country2.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country2" w p ls 2,x>(m2-m_max) ? exp(f2(x+m_max)):1/0 notitle w l ls 2,\
-  "country3.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country3" w p ls 3,x>(m3-m_max) ? exp(f3(x+m_max)):1/0 notitle w l ls 3,\
-  "country4.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country4" w p ls 4,x>(m4-m_max) ? exp(f4(x+m_max)):1/0 notitle w l ls 4,\
-  "country5.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country5" w p ls 5,x>(m5-m_max) ? exp(f5(x+m_max)):1/0 notitle w l ls 5,\
-  "country6.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country6" w p ls 6,x>(m6-m_max) ? exp(f6(x+m_max)):1/0 notitle w l ls 6
+p "country1.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country1" w p ls 1,\
+  "country2.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country2" w p ls 2,\
+  "country3.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country3" w p ls 3,\
+  "country4.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country4" w p ls 4,\
+  "country5.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country5" w p ls 5,\
+  "country6.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country6" w p ls 6
 
 #unset logscale y
-set key b l
+set key t r
 set yrange [0.01:*]
 set ylabel "relative infection rates"
 unset logscale y
@@ -123,12 +135,26 @@ set format x "%g"
 set format y "%g"
 set xlabel "Days ago"
 @MARGINS_2
-p x>(m1-m_max) ? df1(x+m_max): 1/0 title "country1" w l ls 1,\
-  x>(m2-m_max) ? df2(x+m_max): 1/0 title "country2" w l ls 2,\
-  x>(m3-m_max) ? df3(x+m_max): 1/0 title "country3" w l ls 3,\
-  x>(m4-m_max) ? df4(x+m_max): 1/0 title "country4" w l ls 4,\
-  x>(m5-m_max) ? df5(x+m_max): 1/0 title "country5" w l ls 5,\
-  x>(m6-m_max) ? df6(x+m_max): 1/0 title "country6" w l ls 6
+p  "/tmp/country1.csv" u ($1-m_max):($1 >m1 ? deriv1($1,exp($2)): 1/0) title "country1" w l ls 1 ,\
+   "/tmp/country2.csv" u ($1-m_max):($1 >m2 ? deriv2($1,exp($2)): 1/0) title "country2" w l ls 2 ,\
+   "/tmp/country3.csv" u ($1-m_max):($1 >m3 ? deriv3($1,exp($2)): 1/0) title "country3" w l ls 3 ,\
+   "/tmp/country4.csv" u ($1-m_max):($1 >m4 ? deriv4($1,exp($2)): 1/0) title "country4" w l ls 4 ,\
+   "/tmp/country5.csv" u ($1-m_max):($1 >m5 ? deriv5($1,exp($2)): 1/0) title "country5" w l ls 5 ,\
+   "/tmp/country6.csv" u ($1-m_max):($1 >m6 ? deriv6($1,exp($2)): 1/0) title "country6" w l ls 6 
+
+# Some old polynomial fits:
+#p  "/tmp/country1.csv" u ($1-m_max):($1>m1 ? deriv($1,exp($2)) :1/0) title "country1" w l ls 1 ,\
+#            x>(m1-m_max) ? df1(x+m_max): 1/0 title "country1" w l ls 1,\
+#  "/tmp/country2.csv" u ($1-m_max):($1>m2 ? deriv($1,exp($2)) :1/0) notitle "country2" w p ls 2 ,\
+#            x>(m2-m_max) ? df2(x+m_max): 1/0 title "country2" w l ls 2,\
+#  "/tmp/country3.csv" u ($1-m_max):($1 > m3 ? deriv($1,exp($2)): 1/0) notitle "country3" w p ls 3 ,\
+#            x>(m3-m_max) ? df3(x+m_max): 1/0 title "country3" w l ls 3,\
+#  "/tmp/country4.csv" u ($1-m_max):($1>m4 ? deriv($1,exp($2)): 1/0) notitle "country4" w p ls 4 ,\
+#            x>(m4-m_max) ? df4(x+m_max): 1/0 title "country4" w l ls 4,\
+#  "/tmp/country5.csv" u ($1-m_max):($1>m5 ? deriv($1,exp($2)) : 1/0) notitle "country5" w p ls 5 ,\
+#            x>(m5-m_max) ? df5(x+m_max): 1/0 title "country5" w l ls 5,\
+#  "/tmp/country6.csv" u ($1-m_max):($1>m6 ? deriv($1,exp($2)) : 1/0) notitle "country6" w p ls 6 ,\
+#            x>(m6-m_max) ? df6(x+m_max): 1/0 title "country6" w l ls 6
 
 set ylabel "currently sick (ppm)"
 unset logscale y
@@ -151,8 +177,6 @@ set out
 ###################### Logistic Curve ###############################################333
 
 # function to calculate the daily increase
-dinc(x) = (vD = x-old_v, old_v = x, vD)
-old_v = NaN
 
 # logistic function
 l1(x) = L1/(1+exp(-k1*(x-x01)))
@@ -187,7 +211,7 @@ fit l6(x) "country6.csv" u 0:($2>50 ? ($2) :1/0) via L6,k6,x06
 set term post eps color enhanced size 3,4
 set out "logistic-curve.eps"
 set xrange [-25:25]
-set yrange [0:120]
+set yrange [0:200]
 #set title "Logisitc curve"
 h_gap=0.1
 load 'multi.gnu'
@@ -300,12 +324,12 @@ print "define(_doubling_table, "
 print sprintf("*Infection rates doubled in :*")
 print sprintf("|Country | days until doubling of infections| ")
 print sprintf("| --- | --- |")
-print sprintf("|country1 |%.2f days|",log(2)/df1(m_max-1))
-print sprintf("|country2 |%.2f days|",log(2)/df2(m_max-1))
-print sprintf("|country3 |%.2f days|",log(2)/df3(m_max-1))
-print sprintf("|country4 |%.2f days|",log(2)/df4(m_max-1))
-print sprintf("|country5 |%.2f days|",log(2)/df5(m_max-1))
-print sprintf("|country6 |%.2f days|",log(2)/df6(m_max-1))
+print sprintf("|country1 |%.2f days|",log(2)/vD1)
+print sprintf("|country2 |%.2f days|",log(2)/vD2)
+print sprintf("|country3 |%.2f days|",log(2)/vD3)
+print sprintf("|country4 |%.2f days|",log(2)/vD4)
+print sprintf("|country5 |%.2f days|",log(2)/vD5)
+print sprintf("|country6 |%.2f days|",log(2)/vD6)
 print ")"
 print ""
 print "define(_logistic_table,"
