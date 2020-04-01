@@ -2,48 +2,24 @@
 
 set fit errorvariables
 
-######### Exponential with polynoms as argument
-# the polinomials
-f1(x) = (a1+b1*x+1e-2*c1*x**2+1e-4*d1*x**3+1e-6*e1*x**4)
-f2(x) = (a2+b2*x+1e-2*c2*x**2+1e-4*d2*x**3+1e-6*e2*x**4)
-f3(x) = (a3+b3*x+1e-2*c3*x**2+1e-4*d3*x**3+1e-6*e3*x**4)
-f4(x) = (a4+b4*x+1e-2*c4*x**2+1e-4*d4*x**3+1e-6*e4*x**4)
-f5(x) = (a5+b5*x+1e-2*c5*x**2+1e-4*d5*x**3+1e-6*e5*x**4)
-f6(x) = (a6+b6*x+1e-2*c6*x**2+1e-4*d6*x**3+1e-6*e6*x**4)
-f7(x) = (a7+b7*x+1e-2*c7*x**2+1e-4*d7*x**3+1e-6*e7*x**4)
-
-a1 = a2 = a3 = a4 = a5 = a6 = a7 = a8 = -73.4712  
-b1 = b2 = b3 = b4 = b5 = b6 = b7 = b8 = 4.60956   
-c1 = c2 = c3 = c4 = c5 = c6 = c7 = c8 = -9  ;     
-d1 = d2 = d3 = d4 = d5 = d6 = d7 = d8 = -0.645507 ;
-e1 = e2 = e3 = e4 = e5 = e6 = e7 = e8 = 0.1 ;
-
-# their derivatev, the rates
-df1(x) = (b1+2*1e-2*c1*x+3*1e-4*d1*x**2+4*1e-6*e1*x**3)
-df2(x) = (b2+2*1e-2*c2*x+3*1e-4*d2*x**2+4*1e-6*e2*x**3)
-df3(x) = (b3+2*1e-2*c3*x+3*1e-4*d3*x**2+4*1e-6*e3*x**3)
-df4(x) = (b4+2*1e-2*c4*x+3*1e-4*d4*x**2+4*1e-6*e4*x**3)
-df5(x) = (b5+2*1e-2*c5*x+3*1e-4*d5*x**2+4*1e-6*e5*x**3)
-df6(x) = (b6+2*1e-2*c6*x+3*1e-4*d6*x**2+4*1e-6*e6*x**3)
-df7(x) = (b7+2*1e-2*c7*x+3*1e-4*d7*x**2+4*1e-6*e7*x**3)
-df8(x) = (b8+2*1e-2*c8*x+3*1e-4*d8*x**2+4*1e-6*e8*x**3)
-
-# error estimates:
-sdf1(x) = sqrt(((2*1e-2*c1_err*x)**2 + (6*1e-4*d1*x*d1_err)**2 + (12*1e-6*e1*e1_err*x**2)**2)/4)
-sdf2(x) = sqrt(((2*1e-2*c2_err*x)**2 + (6*1e-4*d2*x*d2_err)**2 + (12*1e-6*e2*e2_err*x**2)**2)/4)
-sdf3(x) = sqrt(((2*1e-2*c3_err*x)**2 + (6*1e-4*d3*x*d3_err)**2 + (12*1e-6*e3*e3_err*x**2)**2)/4)
-sdf4(x) = sqrt(((2*1e-2*c4_err*x)**2 + (6*1e-4*d4*x*d4_err)**2 + (12*1e-6*e4*e4_err*x**2)**2)/4)
-sdf5(x) = sqrt(((2*1e-2*c5_err*x)**2 + (6*1e-4*d5*x*d5_err)**2 + (12*1e-6*e5*e5_err*x**2)**2)/4)
-sdf6(x) = sqrt(((2*1e-2*c6_err*x)**2 + (6*1e-4*d6*x*d6_err)**2 + (12*1e-6*e6*e6_err*x**2)**2)/4)
-
-ssdf1(x) = sqrt( (log(2)*(2*1e-2*c1+6*1e-4*d1*x+12*1e-6*e1*x**2)*sdf1(x)/(df1(x))**2)**2 )
-ssdf2(x) = sqrt( (log(2)*(2*1e-2*c2+6*1e-4*d2*x+12*1e-6*e2*x**2)*sdf2(x)/(df2(x))**2)**2 )
-ssdf3(x) = sqrt( (log(2)*(2*1e-2*c3+6*1e-4*d3*x+12*1e-6*e3*x**2)*sdf3(x)/(df3(x))**2)**2 )
-ssdf4(x) = sqrt( (log(2)*(2*1e-2*c4+6*1e-4*d4*x+12*1e-6*e4*x**2)*sdf4(x)/(df4(x))**2)**2 )
-ssdf5(x) = sqrt( (log(2)*(2*1e-2*c5+6*1e-4*d5*x+12*1e-6*e5*x**2)*sdf5(x)/(df5(x))**2)**2 )
-ssdf6(x) = sqrt( (log(2)*(2*1e-2*c6+6*1e-4*d6*x+12*1e-6*e6*x**2)*sdf6(x)/(df6(x))**2)**2 )
+array countryName[6]
+countryName[1] = "country1"
+countryName[2] = "country2"
+countryName[3] = "country3"
+countryName[4] = "country4"
+countryName[5] = "country5"
+countryName[6] = "country6"
 
 dinc(x) = (vD = (x-old_x), old_x = x, vD)
+
+
+#array vD[6]
+#array old_x[6]
+#array old_y[6]
+#old_x = old_x[1] = old_x[2] =old_x[3] =old_x[4] =old_x[5] =old_x[6] =NaN
+#old_y = old_y[1] = old_y[2] =old_y[3] =old_y[4] =old_y[5] =old_y[6] =NaN
+
+#deriv(x,y,i) = (vD[i] = 2*(y-old_y[i])/((x-old_x[i])*(old_y[i]+y)), old_y[i] = y, old_x[i] = x, vD[i])
 
 deriv1(x,y) = (vD1 = 2*(y-old_y1)/((x-old_x1)*(old_y1+y)), old_y1 = y, old_x1 = x, vD1)
 deriv2(x,y) = (vD2 = 2*(y-old_y2)/((x-old_x2)*(old_y2+y)), old_y2 = y, old_x2 = x, vD2)
@@ -54,50 +30,24 @@ deriv6(x,y) = (vD6 = 2*(y-old_y6)/((x-old_x6)*(old_y6+y)), old_y6 = y, old_x6 = 
 old_x = old_x1 = old_x2 =old_x3 =old_x4 =old_x5 =old_x6 =NaN
 old_y = old_y1 = old_y2 =old_y3 =old_y4 =old_y5 =old_y6 =NaN
 
-fit f1(x) "country1.csv" u 0:($2>50 ? log($2) :1/0) via a1,b1,c1,d1,e1
-fit f2(x) "country2.csv" u 0:($2>50 ? log($2) :1/0) via a2,b2,c2,d2,e2
-fit f3(x) "country3.csv" u 0:($2>50 ? log($2) :1/0) via e3,b3,c3,d3,a3
-fit f4(x) "country4.csv" u 0:($2>50 ? log($2) :1/0) via a4,b4,c4,d4,e4
-fit f5(x) "country5.csv" u 0:($2>50 ? log($2) :1/0) via a5,b5,c5,d5,e5
-fit f6(x) "country6.csv" u 0:($2>50 ? log($2) :1/0) via a6,b6,c6,d6,e6
-
 
 set xrange [*:*]
 set yrange [*:*]
-set table '/dev/null'
-p "country1.csv" u 5:($2>50 ? ($0) :1/0)
-m1=GPVAL_DATA_Y_MIN
-pop1=GPVAL_DATA_X_MIN
-p "country2.csv" u 5:($2>50 ? ($0) :1/0)
-m2=GPVAL_DATA_Y_MIN
-pop2=GPVAL_DATA_X_MIN
-p "country3.csv" u 5:($2>50 ? ($0) :1/0)
-m3=GPVAL_DATA_Y_MIN
-pop3=GPVAL_DATA_X_MIN
-p "country4.csv" u 5:($2>50 ? ($0) :1/0)
-m4=GPVAL_DATA_Y_MIN
-pop4=GPVAL_DATA_X_MIN
-p "country5.csv" u 5:($2>50 ? ($0) :1/0)
-m5=GPVAL_DATA_Y_MIN
-pop5=GPVAL_DATA_X_MIN
-p "country6.csv" u 5:($2>50 ? ($0) :1/0)
-m6=GPVAL_DATA_Y_MIN
-pop6=GPVAL_DATA_X_MIN
-m_max =GPVAL_DATA_Y_MAX
 
-set table "/tmp/country1.csv"
-p "country1.csv" u 0:(log($2)) smooth bezier
-set table "/tmp/country2.csv"
-p "country2.csv" u 0:(log($2)) smooth bezier
-set table "/tmp/country3.csv"
-p "country3.csv" u 0:(log($2)) smooth bezier
-set table "/tmp/country4.csv"
-p "country4.csv" u 0:(log($2)) smooth bezier
-set table "/tmp/country5.csv"
-p "country5.csv" u 0:(log($2)) smooth bezier
-set table "/tmp/country6.csv"
-p "country6.csv" u 0:(log($2)) smooth bezier
+array m[6]
+array popul[6]
+do for [i=1:6]{
+ # get some statistics
+ stats countryName[i].".csv" u 5:($2>50 ? ($0) :1/0) nooutput
+ m[i]=STATS_min_y
+ popul[i]=STATS_min_x
+ m_max =STATS_max_y
+ 
+ # make some smooth curves
+ set table "/tmp/".countryName[i].".csv"
+ p countryName[i].".csv" u 0:(log($2)) smooth bezier
 
+}
 unset table
 
 set key t l    
@@ -119,42 +69,23 @@ set format x ""
 set format y "10^{%L}"
 set ylabel "cumulative infections"
 @MARGINS_1
-p "country1.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country1" w p ls 1,\
-  "country2.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country2" w p ls 2,\
-  "country3.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country3" w p ls 3,\
-  "country4.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country4" w p ls 4,\
-  "country5.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country5" w p ls 5,\
-  "country6.csv" u ($0-m_max):($2>50 ? ($2) :1/0) title "country6" w p ls 6
+p for [i=1:6] countryName[i].".csv" u ($0-m_max):($2>50 ? ($2) :1/0) title countryName[i] w p ls i
 
 #unset logscale y
 set key t r
 set yrange [0.01:*]
-set ylabel "relative infection rates"
+set ylabel "relative infection rates/day"
 unset logscale y
 set format x "%g"
 set format y "%g"
 set xlabel "Days ago"
 @MARGINS_2
-p  "/tmp/country1.csv" u ($1-m_max):($1 >m1 ? deriv1($1,exp($2)): 1/0) title "country1" w l ls 1 ,\
-   "/tmp/country2.csv" u ($1-m_max):($1 >m2 ? deriv2($1,exp($2)): 1/0) title "country2" w l ls 2 ,\
-   "/tmp/country3.csv" u ($1-m_max):($1 >m3 ? deriv3($1,exp($2)): 1/0) title "country3" w l ls 3 ,\
-   "/tmp/country4.csv" u ($1-m_max):($1 >m4 ? deriv4($1,exp($2)): 1/0) title "country4" w l ls 4 ,\
-   "/tmp/country5.csv" u ($1-m_max):($1 >m5 ? deriv5($1,exp($2)): 1/0) title "country5" w l ls 5 ,\
-   "/tmp/country6.csv" u ($1-m_max):($1 >m6 ? deriv6($1,exp($2)): 1/0) title "country6" w l ls 6 
-
-# Some old polynomial fits:
-#p  "/tmp/country1.csv" u ($1-m_max):($1>m1 ? deriv($1,exp($2)) :1/0) title "country1" w l ls 1 ,\
-#            x>(m1-m_max) ? df1(x+m_max): 1/0 title "country1" w l ls 1,\
-#  "/tmp/country2.csv" u ($1-m_max):($1>m2 ? deriv($1,exp($2)) :1/0) notitle "country2" w p ls 2 ,\
-#            x>(m2-m_max) ? df2(x+m_max): 1/0 title "country2" w l ls 2,\
-#  "/tmp/country3.csv" u ($1-m_max):($1 > m3 ? deriv($1,exp($2)): 1/0) notitle "country3" w p ls 3 ,\
-#            x>(m3-m_max) ? df3(x+m_max): 1/0 title "country3" w l ls 3,\
-#  "/tmp/country4.csv" u ($1-m_max):($1>m4 ? deriv($1,exp($2)): 1/0) notitle "country4" w p ls 4 ,\
-#            x>(m4-m_max) ? df4(x+m_max): 1/0 title "country4" w l ls 4,\
-#  "/tmp/country5.csv" u ($1-m_max):($1>m5 ? deriv($1,exp($2)) : 1/0) notitle "country5" w p ls 5 ,\
-#            x>(m5-m_max) ? df5(x+m_max): 1/0 title "country5" w l ls 5,\
-#  "/tmp/country6.csv" u ($1-m_max):($1>m6 ? deriv($1,exp($2)) : 1/0) notitle "country6" w p ls 6 ,\
-#            x>(m6-m_max) ? df6(x+m_max): 1/0 title "country6" w l ls 6
+p  "/tmp/country1.csv" u ($1-m_max):($1 >m[1] ? deriv1($1,exp($2)): 1/0) title "country1" w l ls 1 ,\
+   "/tmp/country2.csv" u ($1-m_max):($1 >m[2] ? deriv2($1,exp($2)): 1/0) title "country2" w l ls 2 ,\
+   "/tmp/country3.csv" u ($1-m_max):($1 >m[3] ? deriv3($1,exp($2)): 1/0) title "country3" w l ls 3 ,\
+   "/tmp/country4.csv" u ($1-m_max):($1 >m[4] ? deriv4($1,exp($2)): 1/0) title "country4" w l ls 4 ,\
+   "/tmp/country5.csv" u ($1-m_max):($1 >m[5] ? deriv5($1,exp($2)): 1/0) title "country5" w l ls 5 ,\
+   "/tmp/country6.csv" u ($1-m_max):($1 >m[6] ? deriv6($1,exp($2)): 1/0) title "country6" w l ls 6 
 
 set ylabel "currently sick (ppm)"
 unset logscale y
@@ -200,12 +131,12 @@ x01=x02=x03=x04=x05=x06=x07=x08 = 58.3
 k1=k2=k3=k4=k5=k6=k7=k8=0.2
 set xrange [*:*]
 set yrange [*:*]
-fit l1(x) "country1.csv" u 0:($2>50 ? ($2) :1/0) via L1,k1,x01
-fit l2(x) "country2.csv" u 0:($2>50 ? ($2) :1/0) via L2,k2,x02
-fit l3(x) "country3.csv" u 0:($2>50 ? ($2) :1/0) via L3,k3,x03
-fit l4(x) "country4.csv" u 0:($2>50 ? ($2) :1/0) via L4,k4,x04
-fit l5(x) "country5.csv" u 0:($2>50 ? ($2) :1/0) via L5,k5,x05
-fit l6(x) "country6.csv" u 0:($2>50 ? ($2) :1/0) via L6,k6,x06
+fit l1(x) countryName[1].".csv" u 0:($2>50 ? ($2) :1/0) via L1,k1,x01
+fit l2(x) countryName[2].".csv" u 0:($2>50 ? ($2) :1/0) via L2,k2,x02
+fit l3(x) countryName[3].".csv" u 0:($2>50 ? ($2) :1/0) via L3,k3,x03
+fit l4(x) countryName[4].".csv" u 0:($2>50 ? ($2) :1/0) via L4,k4,x04
+fit l5(x) countryName[5].".csv" u 0:($2>50 ? ($2) :1/0) via L5,k5,x05
+fit l6(x) countryName[6].".csv" u 0:($2>50 ? ($2) :1/0) via L6,k6,x06
 
 
 set term post eps color enhanced size 3,4
@@ -336,10 +267,10 @@ print "define(_logistic_table,"
 print sprintf("*Max expected total infections:*")
 print sprintf("|Country | total | in persons per million | ")
 print sprintf("| --- | ---- | ---- |")
-print sprintf("|country1| %d +/- %.0f| %.1f +/- %.1f|",L1,L1_err,L1/pop1,L1_err/pop1)
-print sprintf("|country2| %d +/- %.0f| %.1f +/- %.1f|",L2,L2_err,L2/pop2,L2_err/pop2)
-print sprintf("|country3| %d +/- %.0f| %.1f +/- %.1f|",L3,L3_err,L3/pop3,L3_err/pop3)
-print sprintf("|country4| %d +/- %.0f| %.1f +/- %.1f|",L4,L4_err,L4/pop4,L4_err/pop4)
-print sprintf("|country5| %d +/- %.0f| %.1f +/- %.1f|",L5,L5_err,L5/pop5,L5_err/pop5)
-print sprintf("|country6| %d +/- %.0f| %.1f +/- %.1f|",L6,L6_err,L6/pop6,L6_err/pop6)
+print sprintf("|country1| %d +/- %.0f| %.1f +/- %.1f|",L1,L1_err,L1/popul[1],L1_err/popul[1])
+print sprintf("|country2| %d +/- %.0f| %.1f +/- %.1f|",L2,L2_err,L2/popul[2],L2_err/popul[2])
+print sprintf("|country3| %d +/- %.0f| %.1f +/- %.1f|",L3,L3_err,L3/popul[3],L3_err/popul[3])
+print sprintf("|country4| %d +/- %.0f| %.1f +/- %.1f|",L4,L4_err,L4/popul[4],L4_err/popul[4])
+print sprintf("|country5| %d +/- %.0f| %.1f +/- %.1f|",L5,L5_err,L5/popul[5],L5_err/popul[5])
+print sprintf("|country6| %d +/- %.0f| %.1f +/- %.1f|",L6,L6_err,L6/popul[6],L6_err/popul[6])
 print ")"
