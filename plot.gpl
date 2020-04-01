@@ -74,18 +74,18 @@ p for [i=1:6] countryName[i].".csv" u ($0-m_max):($2>50 ? ($2) :1/0) title count
 #unset logscale y
 set key t r
 set yrange [0.01:*]
-set ylabel "relative infection rates/day"
+set ylabel "relative infection rates [1/day]"
 unset logscale y
 set format x "%g"
 set format y "%g"
 set xlabel "Days ago"
 @MARGINS_2
-p  "/tmp/country1.csv" u ($1-m_max):($1 >m[1] ? deriv1($1,exp($2)): 1/0) title "country1" w l ls 1 ,\
-   "/tmp/country2.csv" u ($1-m_max):($1 >m[2] ? deriv2($1,exp($2)): 1/0) title "country2" w l ls 2 ,\
-   "/tmp/country3.csv" u ($1-m_max):($1 >m[3] ? deriv3($1,exp($2)): 1/0) title "country3" w l ls 3 ,\
-   "/tmp/country4.csv" u ($1-m_max):($1 >m[4] ? deriv4($1,exp($2)): 1/0) title "country4" w l ls 4 ,\
-   "/tmp/country5.csv" u ($1-m_max):($1 >m[5] ? deriv5($1,exp($2)): 1/0) title "country5" w l ls 5 ,\
-   "/tmp/country6.csv" u ($1-m_max):($1 >m[6] ? deriv6($1,exp($2)): 1/0) title "country6" w l ls 6 
+p  "/tmp/".countryName[1].".csv" u ($1-m_max):($1 >m[1] ? deriv1($1,exp($2)): 1/0) title countryName[1] w l ls 1 ,\
+   "/tmp/".countryName[2].".csv" u ($1-m_max):($1 >m[2] ? deriv2($1,exp($2)): 1/0) title countryName[2] w l ls 2 ,\
+   "/tmp/".countryName[3].".csv" u ($1-m_max):($1 >m[3] ? deriv3($1,exp($2)): 1/0) title countryName[3] w l ls 3 ,\
+   "/tmp/".countryName[4].".csv" u ($1-m_max):($1 >m[4] ? deriv4($1,exp($2)): 1/0) title countryName[4] w l ls 4 ,\
+   "/tmp/".countryName[5].".csv" u ($1-m_max):($1 >m[5] ? deriv5($1,exp($2)): 1/0) title countryName[5] w l ls 5 ,\
+   "/tmp/".countryName[6].".csv" u ($1-m_max):($1 >m[6] ? deriv6($1,exp($2)): 1/0) title countryName[6] w l ls 6 
 
 set ylabel "currently sick (ppm)"
 unset logscale y
@@ -97,12 +97,7 @@ set term post eps color enhanced size 3,2.5
 set tmargin -1
 set bmargin -1
 set out "curr-sick.eps"
-p "country1.csv" u ($0-m_max):(($2-($3+$4))/$5) title "country1" w linespoints ls 1,\
-  "country2.csv" u ($0-m_max):(($2-($3+$4))/$5) title "country2" w linespoints ls 2,\
-  "country3.csv" u ($0-m_max):(($2-($3+$4))/$5) title "country3" w linespoints ls 3,\
-  "country4.csv" u ($0-m_max):(($2-($3+$4))/$5) title "country4" w linespoints ls 4,\
-  "country5.csv" u ($0-m_max):(($2-($3+$4))/$5) title "country5" w linespoints ls 5,\
-  "country6.csv" u ($0-m_max):(($2-($3+$4))/$5) title "country6" w linespoints ls 6
+p for [i=1:6] countryName[i].".csv" u ($0-m_max):(($2-($3+$4))/$5) title countryName[i] w linespoints ls i
 set out
 
 ###################### Logistic Curve ###############################################333
@@ -150,12 +145,12 @@ set multiplot
 #m_max=0
 set ylabel "total infections /1000"
 @MARGINS_1
-p "country1.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country1" w p ls 1,l1(x+m_max)*1e-3 notitle w l ls 1,\
-  "country2.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country2" w p ls 2,l2(x+m_max)*1e-3 notitle w l ls 2,\
-  "country3.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country3" w p ls 3,l3(x+m_max)*1e-3 notitle w l ls 3,\
-  "country4.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country4" w p ls 4,l4(x+m_max)*1e-3 notitle w l ls 4,\
-  "country5.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country5" w p ls 5,l5(x+m_max)*1e-3 notitle w l ls 5,\
-  "country6.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country6" w p ls 6,l6(x+m_max)*1e-3 notitle w l ls 6
+p countryName[1].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title countryName[1] w p ls 1,l1(x+m_max)*1e-3 notitle w l ls 1,\
+  countryName[2].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title countryName[2] w p ls 2,l2(x+m_max)*1e-3 notitle w l ls 2,\
+  countryName[3].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title countryName[3] w p ls 3,l3(x+m_max)*1e-3 notitle w l ls 3,\
+  countryName[4].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title countryName[4] w p ls 4,l4(x+m_max)*1e-3 notitle w l ls 4,\
+  countryName[5].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title countryName[5] w p ls 5,l5(x+m_max)*1e-3 notitle w l ls 5,\
+  countryName[6].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title countryName[6] w p ls 6,l6(x+m_max)*1e-3 notitle w l ls 6
 
 set xrange [-30:*]
 set yrange [*:*]
@@ -180,12 +175,12 @@ set out
 
 ###################### Logistic-linear Curve ###############################################
 
-lr1(x) =(m1*x+n1)/(1+exp(-kr1*(x-xr01)))
-lr2(x) =(m2*x+n2)/(1+exp(-kr2*(x-xr02)))
-lr3(x) =(m3*x+n3)/(1+exp(-kr3*(x-xr03)))
-lr4(x) =(m4*x+n4)/(1+exp(-kr4*(x-xr04)))
-lr5(x) =(m5*x+n5)/(1+exp(-kr5*(x-xr05)))
-lr6(x) =(m6*x+n6)/(1+exp(-kr6*(x-xr06)))
+lr1(x) =(m1**2*x+n1)/(1+exp(-kr1*(x-xr01)))
+lr2(x) =(m2**2*x+n2)/(1+exp(-kr2*(x-xr02)))
+lr3(x) =(m3**2*x+n3)/(1+exp(-kr3*(x-xr03)))
+lr4(x) =(m4**2*x+n4)/(1+exp(-kr4*(x-xr04)))
+lr5(x) =(m5**2*x+n5)/(1+exp(-kr5*(x-xr05)))
+lr6(x) =(m6**2*x+n6)/(1+exp(-kr6*(x-xr06)))
 
 n1=n2=n3=n4=n5=n6=100000.
 m1=m2=m3=m4=m5=m6=1000.
@@ -219,12 +214,12 @@ p "country1.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country1" w p ls 1
   "country5.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country5" w p ls 5,lr5(x+m_max)*1e-3 notitle w l ls 5,\
   "country6.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country6" w p ls 6,lr6(x+m_max)*1e-3 notitle w l ls 6
 
-dlr1(x) = (m1*(1+exp(-kr1*(x-xr01))) + kr1*(n1+m1*x)*exp(-kr1*(x-xr01)))/(1+exp(-kr1*(x-xr01)))**2 
-dlr2(x) = (m2*(1+exp(-kr2*(x-xr02))) + kr2*(n2+m2*x)*exp(-kr2*(x-xr02)))/(1+exp(-kr2*(x-xr02)))**2 
-dlr3(x) = (m3*(1+exp(-kr3*(x-xr03))) + kr3*(n3+m3*x)*exp(-kr3*(x-xr03)))/(1+exp(-kr3*(x-xr03)))**2 
-dlr4(x) = (m4*(1+exp(-kr4*(x-xr04))) + kr4*(n4+m4*x)*exp(-kr4*(x-xr04)))/(1+exp(-kr4*(x-xr04)))**2 
-dlr5(x) = (m5*(1+exp(-kr5*(x-xr05))) + kr5*(n5+m5*x)*exp(-kr5*(x-xr05)))/(1+exp(-kr5*(x-xr05)))**2 
-dlr6(x) = (m6*(1+exp(-kr6*(x-xr06))) + kr6*(n6+m6*x)*exp(-kr6*(x-xr06)))/(1+exp(-kr6*(x-xr06)))**2 
+dlr1(x) = (m1**2*(1+exp(-kr1*(x-xr01))) + kr1*(n1+m1**2*x)*exp(-kr1*(x-xr01)))/(1+exp(-kr1*(x-xr01)))**2 
+dlr2(x) = (m2**2*(1+exp(-kr2*(x-xr02))) + kr2*(n2+m2**2*x)*exp(-kr2*(x-xr02)))/(1+exp(-kr2*(x-xr02)))**2 
+dlr3(x) = (m3**2*(1+exp(-kr3*(x-xr03))) + kr3*(n3+m3**2*x)*exp(-kr3*(x-xr03)))/(1+exp(-kr3*(x-xr03)))**2 
+dlr4(x) = (m4**2*(1+exp(-kr4*(x-xr04))) + kr4*(n4+m4**2*x)*exp(-kr4*(x-xr04)))/(1+exp(-kr4*(x-xr04)))**2 
+dlr5(x) = (m5**2*(1+exp(-kr5*(x-xr05))) + kr5*(n5+m5**2*x)*exp(-kr5*(x-xr05)))/(1+exp(-kr5*(x-xr05)))**2 
+dlr6(x) = (m6**2*(1+exp(-kr6*(x-xr06))) + kr6*(n6+m6**2*x)*exp(-kr6*(x-xr06)))/(1+exp(-kr6*(x-xr06)))**2 
 
 old_v = NaN
 set xrange [-30:25]
