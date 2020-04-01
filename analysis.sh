@@ -3,9 +3,9 @@
 
 export COUNTRY1=germany
 export COUNTRY2=italy
-export COUNTRY3=korea
-export COUNTRY4=spain
-export COUNTRY5=uk
+export COUNTRY3=malaysia
+export COUNTRY4=france
+export COUNTRY5=sweden
 export COUNTRY6=us
 
 export CONFIRMED="$HOME/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
@@ -34,6 +34,15 @@ function create_confirmed {
 		korea) 
 			csvtool col 1,145 <(csvtool transpose $CONFIRMED) |tail -n +5 
 			;;
+		sweden) 
+			csvtool col 1,207 <(csvtool transpose $CONFIRMED) |tail -n +5 
+			;;
+		france) 
+			csvtool col 1,118 <(csvtool transpose $CONFIRMED) |tail -n +5 
+			;;
+		malaysia) 
+			csvtool col 1,155 <(csvtool transpose $CONFIRMED) |tail -n +5 
+			;;
 	esac
 }
 
@@ -56,6 +65,15 @@ function create_recovered {
 			;;
 		korea) 
 			csvtool col 139 <(csvtool transpose $RECOVERED) |tail -n +5 
+			;;
+		sweden) 
+			csvtool col 205 <(csvtool transpose $RECOVERED) |tail -n +5 
+			;;
+		france) 
+			csvtool col 110 <(csvtool transpose $RECOVERED) |tail -n +5 
+			;;
+		malaysia) 
+			csvtool col 150 <(csvtool transpose $RECOVERED) |tail -n +5 
 			;;
 	esac
 
@@ -81,6 +99,15 @@ function create_deaths {
 		korea) 
 			csvtool col 145 <(csvtool transpose $DEATH) |tail -n +5 
 			;;
+		sweden) 
+			csvtool col 207 <(csvtool transpose $DEATH) |tail -n +5 
+			;;
+		malaysia) 
+			csvtool col 155 <(csvtool transpose $DEATH) |tail -n +5 
+			;;
+		france) 
+			csvtool col 118 <(csvtool transpose $DEATH) |tail -n +5 
+			;;
 	esac
 }
 
@@ -100,6 +127,7 @@ create_all_col malaysia 1 | awk -F, '{print $1,$2,$3,$4,33}'> malaysia.csv
 create_all_col iran 1 | awk -F, '{print $1,$2,$3,$4,83}'> iran.csv
 create_all_col uk df 1 | awk -F, '{print $1,$2,$3,$4,67}'> uk.csv
 create_all_col us 1 | awk -F, '{print $1,$2,$3,$4,328}'> us.csv
+create_all_col sweden 1 | awk -F, '{print $1,$2,$3,$4,10}'> sweden.csv
 
 gnuplot -p <(sed -e "s/country1/$COUNTRY1/g" -e "s/country2/$COUNTRY2/g" -e "s/country3/$COUNTRY3/g" -e "s/country4/$COUNTRY4/g" -e "s/country5/$COUNTRY5/g" -e "s/country6/$COUNTRY6/g" plot.gpl) 2>gnuout.txt
 ##

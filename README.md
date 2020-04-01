@@ -7,7 +7,7 @@ Here is some regularly updated analysis of the COVID-19 outbreak.
 
 Data from: https://github.com/CSSEGISandData/COVID-19
 
- *UPDATED: Wed 01 Apr 2020 09:55:13 AM CEST*
+ *UPDATED: Wed 01 Apr 2020 10:09:15 PM CEST*
 
 Data are provided for number of the number of _cumulated infected_, _recovered_ and _deceased_ patients.
 
@@ -38,9 +38,9 @@ interpolated infection data in order to remove the scatter of the data.
 | --- | --- |
 |germany |9.60 days|
 |italy |17.29 days|
-|korea |59.06 days|
-|spain |7.86 days|
-|uk |5.44 days|
+|malaysia |12.70 days|
+|france |4.92 days|
+|sweden |7.45 days|
 |us |4.68 days|
 
 
@@ -69,9 +69,9 @@ increases as data points.
 | --- | ---- | ---- |
 |germany| 101149 +/- 3885| 1218.7 +/- 46.8|
 |italy| 129845 +/- 1715| 2164.1 +/- 28.6|
-|korea| 8972 +/- 95| 116.5 +/- 1.2|
-|spain| 140062 +/- 4294| 2980.1 +/- 91.4|
-|uk| 52643 +/- 3532| 785.7 +/- 52.7|
+|malaysia| 3300 +/- 110| 100.0 +/- 3.3|
+|france| 98971 +/- 7716| 1477.2 +/- 115.2|
+|sweden| 9594 +/- 1899| 959.4 +/- 189.9|
 |us| 300943 +/- 9480| 917.5 +/- 28.9|
 
 
