@@ -183,7 +183,7 @@ lr5(x) =(m5**2*x+n5)/(1+exp(-kr5*(x-xr05)))
 lr6(x) =(m6**2*x+n6)/(1+exp(-kr6*(x-xr06)))
 
 n1=n2=n3=n4=n5=n6=100000.
-m1=m2=m3=m4=m5=m6=1000.
+m1=m2=m3=m4=m5=m6=10.
 xr01=xr02=xr03=xr04=xr05=xr06=xr07=xr08 = 58.3
 kr1=kr2=kr3=kr4=kr5=kr6=kr7=kr8=0.2
 set xrange [*:*]
