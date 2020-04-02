@@ -13,13 +13,18 @@ countryName[6] = "country6"
 dinc(x) = (vD = (x-old_x), old_x = x, vD)
 
 
-#array vD[6]
-#array old_x[6]
-#array old_y[6]
-#old_x = old_x[1] = old_x[2] =old_x[3] =old_x[4] =old_x[5] =old_x[6] =NaN
-#old_y = old_y[1] = old_y[2] =old_y[3] =old_y[4] =old_y[5] =old_y[6] =NaN
-
-#deriv(x,y,i) = (vD[i] = 2*(y-old_y[i])/((x-old_x[i])*(old_y[i]+y)), old_y[i] = y, old_x[i] = x, vD[i])
+#array vD_a[6]
+#array old_x_a[6]
+#array old_y_a[6]
+#old_x = old_x_a[1] = old_x_a[2] =old_x_a[3] =old_x_a[4] =old_x_a[5] =old_x_a[6] =NaN
+#old_y = old_y_a[1] = old_y_a[2] =old_y_a[3] =old_y_a[4] =old_y_a[5] =old_y_a[6] =NaN
+#
+#deriv(x,y,i) = (old_x = old_x_a[i],\
+#				old_y = old_y_a[i],\
+#                vD = 2*(y-old_y)/((x-old_x)*(old_y+y)), \
+#                old_y = y, \
+#				old_x = x, \
+#				vD_a[i]=vD)
 
 deriv1(x,y) = (vD1 = 2*(y-old_y1)/((x-old_x1)*(old_y1+y)), old_y1 = y, old_x1 = x, vD1)
 deriv2(x,y) = (vD2 = 2*(y-old_y2)/((x-old_x2)*(old_y2+y)), old_y2 = y, old_x2 = x, vD2)
@@ -29,7 +34,6 @@ deriv5(x,y) = (vD5 = 2*(y-old_y5)/((x-old_x5)*(old_y5+y)), old_y5 = y, old_x5 = 
 deriv6(x,y) = (vD6 = 2*(y-old_y6)/((x-old_x6)*(old_y6+y)), old_y6 = y, old_x6 = x, vD6)
 old_x = old_x1 = old_x2 =old_x3 =old_x4 =old_x5 =old_x6 =NaN
 old_y = old_y1 = old_y2 =old_y3 =old_y4 =old_y5 =old_y6 =NaN
-
 
 set xrange [*:*]
 set yrange [*:*]
@@ -46,7 +50,6 @@ do for [i=1:6]{
  # make some smooth curves
  set table "/tmp/".countryName[i].".csv"
  p countryName[i].".csv" u 0:(log($2)) smooth bezier
-
 }
 unset table
 
@@ -87,13 +90,14 @@ p  "/tmp/".countryName[1].".csv" u ($1-m_max):($1 >m[1] ? deriv1($1,exp($2)): 1/
    "/tmp/".countryName[5].".csv" u ($1-m_max):($1 >m[5] ? deriv5($1,exp($2)): 1/0) title countryName[5] w l ls 5 ,\
    "/tmp/".countryName[6].".csv" u ($1-m_max):($1 >m[6] ? deriv6($1,exp($2)): 1/0) title countryName[6] w l ls 6 
 
-set ylabel "currently sick (ppm)"
-unset logscale y
-set key t l
 unset multiplot
 set out
 
+###################### Currently sick ###############################################333
 set term post eps color enhanced size 3,2.5
+unset logscale y
+set key t l
+set ylabel "currently sick (ppm)"
 set tmargin -1
 set bmargin -1
 set out "curr-sick.eps"
@@ -104,7 +108,6 @@ set out
 
 # function to calculate the daily increase
 
-# logistic function
 l1(x) = L1/(1+exp(-k1*(x-x01)))
 l2(x) = L2/(1+exp(-k2*(x-x02)))
 l3(x) = L3/(1+exp(-k3*(x-x03)))
@@ -157,18 +160,18 @@ set yrange [*:*]
 set ylabel "daily increase /1000"
 set xlabel "days from max increase rate"
 @MARGINS_2
-p dl1(x+x01)*1e-3 title "country1" w l ls 1,\
-  dl2(x+x02)*1e-3 title "country2" w l ls 2,\
-  dl3(x+x03)*1e-3 title "country3" w l ls 3,\
-  dl4(x+x04)*1e-3 title "country4" w l ls 4,\
-  dl5(x+x05)*1e-3 title "country5" w l ls 5,\
-  dl6(x+x06)*1e-3 title "country6" w l ls 6,\
-  'country1.csv' u ($0-x01):(dinc($2)*1e-3) notitle "country1" w p ls 1,\
-  'country2.csv' u ($0-x02):(dinc($2)*1e-3) notitle "country2" w p ls 2,\
-  'country3.csv' u ($0-x03):(dinc($2)*1e-3) notitle "country3" w p ls 3,\
-  'country4.csv' u ($0-x04):(dinc($2)*1e-3) notitle "country4" w p ls 4,\
-  'country5.csv' u ($0-x05):(dinc($2)*1e-3) notitle "country5" w p ls 5,\
-  'country6.csv' u ($0-x06):(dinc($2)*1e-3) notitle "country6" w p ls 6
+p dl1(x+x01)*1e-3 title countryName[1] w l ls 1,\
+  dl2(x+x02)*1e-3 title countryName[2] w l ls 2,\
+  dl3(x+x03)*1e-3 title countryName[3] w l ls 3,\
+  dl4(x+x04)*1e-3 title countryName[4] w l ls 4,\
+  dl5(x+x05)*1e-3 title countryName[5] w l ls 5,\
+  dl6(x+x06)*1e-3 title countryName[6] w l ls 6,\
+  countryName[1].'.csv' u ($0-x01):(dinc($2)*1e-3) notitle countryName[1] w p ls 1,\
+  countryName[2].'.csv' u ($0-x02):(dinc($2)*1e-3) notitle countryName[2] w p ls 2,\
+  countryName[3].'.csv' u ($0-x03):(dinc($2)*1e-3) notitle countryName[3] w p ls 3,\
+  countryName[4].'.csv' u ($0-x04):(dinc($2)*1e-3) notitle countryName[4] w p ls 4,\
+  countryName[5].'.csv' u ($0-x05):(dinc($2)*1e-3) notitle countryName[5] w p ls 5,\
+  countryName[6].'.csv' u ($0-x06):(dinc($2)*1e-3) notitle countryName[6] w p ls 6
 
 unset multiplot
 set out
