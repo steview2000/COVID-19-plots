@@ -7,7 +7,7 @@ Here is some regularly updated analysis of the COVID-19 outbreak.
 
 Data from: https://github.com/CSSEGISandData/COVID-19
 
- *UPDATED: Thu 02 Apr 2020 10:16:16 AM CEST*
+ *UPDATED: Fri 03 Apr 2020 09:39:14 AM CEST*
 
 Data are provided for number of the number of _cumulated infected_, _recovered_ and _deceased_ patients.
 
@@ -36,12 +36,12 @@ interpolated infection data in order to remove the scatter of the data.
 *Infection rates doubled in :*
 |Country | days until doubling of infections| 
 | --- | --- |
-|germany |8.82 days|
-|italy |16.12 days|
-|malaysia |13.57 days|
-|france |6.63 days|
-|sweden |6.58 days|
-|us |5.25 days|
+|germany |8.30 days|
+|italy |16.57 days|
+|malaysia |10.82 days|
+|france |12.75 days|
+|sweden |6.02 days|
+|us |5.28 days|
 
 
 ## Logisitc function
@@ -67,12 +67,12 @@ increases as data points.
 *Max expected total infections:*
 |Country | total | in persons per million | 
 | --- | ---- | ---- |
-|germany| 103987 +/- 3265| 1252.9 +/- 39.3|
-|italy| 131660 +/- 1550| 2194.3 +/- 25.8|
-|malaysia| 3397 +/- 101| 103.0 +/- 3.0|
-|france| 111176 +/- 8267| 1659.3 +/- 123.4|
-|sweden| 12339 +/- 2908| 1233.9 +/- 290.8|
-|us| 332415 +/- 10153| 1013.5 +/- 31.0|
+|germany| 109961 +/- 3301| 1324.8 +/- 39.8|
+|italy| 133953 +/- 1490| 2232.6 +/- 24.8|
+|malaysia| 3565 +/- 107| 108.0 +/- 3.2|
+|france| 101864 +/- 5406| 1520.4 +/- 80.7|
+|sweden| 18732 +/- 6561| 1873.2 +/- 656.1|
+|us| 377003 +/- 13036| 1149.4 +/- 39.7|
 
 
 ## Another fit
