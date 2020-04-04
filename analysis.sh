@@ -3,7 +3,7 @@
 
 export COUNTRY1=germany
 export COUNTRY2=italy
-export COUNTRY3=malaysia
+export COUNTRY3=spain
 export COUNTRY4=france
 export COUNTRY5=sweden
 export COUNTRY6=us
