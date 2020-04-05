@@ -66,7 +66,7 @@ left_margin=0.15
 load 'multi.gnu'
 
 set multiplot
-set yrange [50:200000]
+set yrange [50:300000]
 set xrange [-40:2]
 set format x ""
 set format y "10^{%L}"
@@ -140,7 +140,7 @@ fit l6(x) countryName[6].".csv" u 0:($2>50 ? ($2) :1/0) via L6,k6,x06
 set term post eps color enhanced size 3,4
 set out "logistic-curve.eps"
 set xrange [-25:25]
-set yrange [0:200]
+set yrange [0:300]
 #set title "Logisitc curve"
 h_gap=0.1
 load 'multi.gnu'
@@ -202,7 +202,7 @@ fit lr6(x) "country6.csv" u 0:($2>50 ? ($2) :1/0) via m6,n6,kr6,xr06
 set term post eps color enhanced size 3,4
 set out "logistic-linear.eps"
 set xrange [-25:25]
-set yrange [0:200]
+set yrange [0:350]
 #set title "Logisitc curve"
 h_gap=0.1
 load 'multi.gnu'
@@ -226,7 +226,7 @@ dlr6(x) = (m6**2*(1+exp(-kr6*(x-xr06))) + kr6*(n6+m6**2*x)*exp(-kr6*(x-xr06)))/(
 
 old_v = NaN
 set xrange [-30:25]
-set yrange [-1:20]
+set yrange [-1:30]
 #set xrange [*:*]
 set ylabel "daily increase /1000"
 set xlabel "days from max increase rate"
