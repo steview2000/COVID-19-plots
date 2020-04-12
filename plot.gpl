@@ -140,7 +140,7 @@ fit l6(x) countryName[6].".csv" u 0:($2>50 ? ($2) :1/0) via L6,k6,x06
 set term post eps color enhanced size 3,4
 set out "logistic-curve.eps"
 set xrange [-25:25]
-set yrange [0:400]
+set yrange [0:450]
 #set title "Logisitc curve"
 h_gap=0.1
 load 'multi.gnu'
