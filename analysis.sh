@@ -49,16 +49,16 @@ function create_confirmed {
 function create_recovered {
 	case $1 in
 		germany) 
-			csvtool col 115 <(csvtool transpose $RECOVERED) |tail -n +5 
+			csvtool col 114 <(csvtool transpose $RECOVERED) |tail -n +5 
 			;;
 		italy) 
 			csvtool col 133 <(csvtool transpose $RECOVERED) |tail -n +5 
 			;;
 		us) 
-			csvtool col 229 <(csvtool transpose $RECOVERED) |tail -n +5 
+			csvtool col 227 <(csvtool transpose $RECOVERED) |tail -n +5 
 			;;
 		uk) 
-			csvtool col 227 <(csvtool transpose $RECOVERED) |tail -n +5 
+			csvtool col 225 <(csvtool transpose $RECOVERED) |tail -n +5 
 			;;
 		spain) 
 			csvtool col 201 <(csvtool transpose $RECOVERED) |tail -n +5 
