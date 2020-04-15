@@ -66,7 +66,7 @@ left_margin=0.15
 load 'multi.gnu'
 
 set multiplot
-set yrange [50:500000]
+set yrange [50:700000]
 set xrange [-40:2]
 set format x ""
 set format y "10^{%L}"
@@ -78,7 +78,7 @@ p for [i=1:6] countryName[i].".csv" u ($0-m_max):($2>50 ? ($2) :1/0) title count
 set key t r
 set yrange [0.01:*]
 set ylabel "relative infection rates [1/day]"
-unset logscale y
+#unset logscale y
 set format x "%g"
 set format y "%g"
 set xlabel "Days ago"
