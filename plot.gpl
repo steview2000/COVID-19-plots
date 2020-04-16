@@ -53,7 +53,7 @@ do for [i=1:6]{
 }
 unset table
 
-set key t l    
+set key b r    
 set xrange [30-m_max:1]
 set logscale y
 set term post eps color enhanced size 3,4
@@ -147,6 +147,7 @@ load 'multi.gnu'
 set multiplot
 #m_max=0
 set ylabel "total infections /1000"
+set key t r
 @MARGINS_1
 p "data/".countryName[1].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title countryName[1] w p ls 1,l1(x+m_max)*1e-3 notitle w l ls 1,\
   "data/".countryName[2].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title countryName[2] w p ls 2,l2(x+m_max)*1e-3 notitle w l ls 2,\
@@ -156,9 +157,10 @@ p "data/".countryName[1].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title coun
   "data/".countryName[6].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title countryName[6] w p ls 6,l6(x+m_max)*1e-3 notitle w l ls 6
 
 set xrange [-30:*]
-set yrange [*:*]
+set yrange [-1:15]
 set ylabel "daily increase /1000"
 set xlabel "days from max increase rate"
+set key t l
 @MARGINS_2
 p dl1(x+x01)*1e-3 title countryName[1] w l ls 1,\
   dl2(x+x02)*1e-3 title countryName[2] w l ls 2,\
@@ -208,6 +210,7 @@ h_gap=0.1
 load 'multi.gnu'
 set multiplot
 #m_max=0
+set key t r
 set ylabel "total infections /1000"
 @MARGINS_1
 p "data/country1.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country1" w p ls 1,lr1(x+m_max)*1e-3 notitle w l ls 1,\
@@ -230,6 +233,7 @@ set yrange [-1:30]
 #set xrange [*:*]
 set ylabel "daily increase /1000"
 set xlabel "days from max increase rate"
+unset key
 @MARGINS_2
 p dlr1(x+m_max)*1e-3 title "country1" w l ls 1,\
   dlr2(x+m_max)*1e-3 title "country2" w l ls 2,\
