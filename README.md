@@ -7,7 +7,7 @@ Here is some regularly updated analysis of the COVID-19 outbreak.
 
 Data from: https://github.com/CSSEGISandData/COVID-19
 
- *UPDATED: Thu 16 Apr 2020 09:16:35 AM CEST*
+ *UPDATED: Thu 16 Apr 2020 09:38:33 AM CEST*
 
 Data are provided for number of the number of _cumulated infected_, _recovered_ and _deceased_ patients.
 
@@ -18,7 +18,7 @@ deaths and recovered patients. This number is certainly important for the health
 normalise them by the population. Not that this normalisation is still not sufficient, e.g., when
 the infections mainly occur in a rather small area of a countr. We plot the number of normalised by the population of ad given country (in person per millions - ppm).
 
-![Currently sick](curr-sick.png)
+![Currently sick](plots/curr-sick.png)
 
 
 ## The growth rate of infection
@@ -27,7 +27,7 @@ We first consider the number of infected people. With a constant infection rate 
 reservoir of _infectable_ people. This number should grow initially nearly exponentially without
 proper countermeasures. We plot the data on a linear x-axis and a logarithmic y-axis. In this way an exponential growth of the infections shows up as straight lines. 
 
-![Exponential development](poly-exp-fit.png)
+![Exponential development](plots/poly-exp-fit.png)
 
 We see in the top figure, the infection data for 6 different countries. Most of them do not show
 straight lines over the entire range. We calculate the relative infection rate from smoothed and
@@ -58,7 +58,7 @@ progress of the infections, but rather by the measures the societies are taken t
 outbreak. Nevertheless, fitting a logisitic function to the data might help to detect changes in the
 spreading rate and hence whether measures are working.
 
-![Logistic Curve](logistic-curve.png)
+![Logistic Curve](plots/logistic-curve.png)
 
 Top: Data with logistic curve fits. 
 Bottom: The derivative of the logistic curve (i.e., the daily increases) as lines, and the real
@@ -83,5 +83,5 @@ accept a slow, constant increase of cases, small enough for the health systems t
 countries, including South Korea show a slow linear increase of the accumulated infections.
 Therefore, we also try a fit of the function: I(t) = (a+b*t)/(1+exp(-c*t)) 
 
-![Logist-linear](logistic-linear.png)
+![Logist-linear](plots/logistic-linear.png)
 

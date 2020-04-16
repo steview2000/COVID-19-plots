@@ -118,23 +118,23 @@ function create_all_col {
 
 #create_recovered korea
 
-create_all_col germany 1 | awk -F, '{print $1,$2,$3,$4,83}'> germany.csv
-create_all_col italy 1 | awk -F, '{print $1,$2,$3,$4,60}' > italy.csv
-create_all_col france 1 | awk -F, '{print $1,$2,$3,$4,67}'> france.csv
-create_all_col spain 1 | awk -F, '{print $1,$2,$3,$4,47}'> spain.csv
-create_all_col korea 2 | awk -F, '{print $1,$2,$3,$4,77}'> korea.csv
-create_all_col malaysia 1 | awk -F, '{print $1,$2,$3,$4,33}'> malaysia.csv
-create_all_col iran 1 | awk -F, '{print $1,$2,$3,$4,83}'> iran.csv
-create_all_col uk df 1 | awk -F, '{print $1,$2,$3,$4,67}'> uk.csv
-create_all_col us 1 | awk -F, '{print $1,$2,$3,$4,328}'> us.csv
-create_all_col sweden 1 | awk -F, '{print $1,$2,$3,$4,10}'> sweden.csv
+create_all_col germany 1 | awk -F, '{print $1,$2,$3,$4,83}'> data/germany.csv
+create_all_col italy 1 | awk -F, '{print $1,$2,$3,$4,60}' > data/italy.csv
+create_all_col france 1 | awk -F, '{print $1,$2,$3,$4,67}'> data/france.csv
+create_all_col spain 1 | awk -F, '{print $1,$2,$3,$4,47}'> data/spain.csv
+create_all_col korea 2 | awk -F, '{print $1,$2,$3,$4,77}'> data/korea.csv
+create_all_col malaysia 1 | awk -F, '{print $1,$2,$3,$4,33}'> data/malaysia.csv
+create_all_col iran 1 | awk -F, '{print $1,$2,$3,$4,83}'> data/iran.csv
+create_all_col uk df 1 | awk -F, '{print $1,$2,$3,$4,67}'> data/uk.csv
+create_all_col us 1 | awk -F, '{print $1,$2,$3,$4,328}'> data/us.csv
+create_all_col sweden 1 | awk -F, '{print $1,$2,$3,$4,10}'> data/sweden.csv
 
 gnuplot -p <(sed -e "s/country1/$COUNTRY1/g" -e "s/country2/$COUNTRY2/g" -e "s/country3/$COUNTRY3/g" -e "s/country4/$COUNTRY4/g" -e "s/country5/$COUNTRY5/g" -e "s/country6/$COUNTRY6/g" plot.gpl) 2>gnuout.txt
 ##
-convert -density 300 poly-exp-fit.eps -resize 640 poly-exp-fit.png &
-convert -density 300 curr-sick.eps -resize 640 curr-sick.png &
-convert -density 300 logistic-curve.eps -resize 640 logistic-curve.png &
-convert -density 300 logistic-linear.eps -resize 640 logistic-linear.png
+convert -density 300 plots/poly-exp-fit.eps -resize 640 plots/poly-exp-fit.png &
+convert -density 300 plots/curr-sick.eps -resize 640 plots/curr-sick.png &
+convert -density 300 plots/logistic-curve.eps -resize 640 plots/logistic-curve.png &
+convert -density 300 plots/logistic-linear.eps -resize 640 plots/logistic-linear.png
 ##
 date_string=$(date)
 cat <(tail -n 23 gnuout.txt) README-raw.md|m4  |sed "/*UPDATED:*/c\ *UPDATED: ${date_string}*"> README.md

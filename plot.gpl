@@ -42,14 +42,14 @@ array m[6]
 array popul[6]
 do for [i=1:6]{
  # get some statistics
- stats countryName[i].".csv" u 5:($2>50 ? ($0) :1/0) nooutput
+ stats "data/".countryName[i].".csv" u 5:($2>50 ? ($0) :1/0) nooutput
  m[i]=STATS_min_y
  popul[i]=STATS_min_x
  m_max =STATS_max_y
  
  # make some smooth curves
  set table "/tmp/".countryName[i].".csv"
- p countryName[i].".csv" u 0:(log($2)) smooth bezier
+ p "data/".countryName[i].".csv" u 0:(log($2)) smooth bezier
 }
 unset table
 
@@ -57,7 +57,7 @@ set key t l
 set xrange [30-m_max:1]
 set logscale y
 set term post eps color enhanced size 3,4
-set out "poly-exp-fit.eps"
+set out "plots/poly-exp-fit.eps"
 
 COL_Number = 1
 ROW_Number = 2
@@ -72,7 +72,7 @@ set format x ""
 set format y "10^{%L}"
 set ylabel "cumulative infections"
 @MARGINS_1
-p for [i=1:6] countryName[i].".csv" u ($0-m_max):($2>50 ? ($2) :1/0) title countryName[i] w p ls i
+p for [i=1:6] "data/".countryName[i].".csv" u ($0-m_max):($2>50 ? ($2) :1/0) title countryName[i] w p ls i
 
 #unset logscale y
 set key t r
@@ -100,8 +100,8 @@ set key t l
 set ylabel "currently sick (ppm)"
 set tmargin -1
 set bmargin -1
-set out "curr-sick.eps"
-p for [i=1:6] countryName[i].".csv" u ($0-m_max):(($2-($3+$4))/$5) title countryName[i] w linespoints ls i
+set out "plots/curr-sick.eps"
+p for [i=1:6] "data/".countryName[i].".csv" u ($0-m_max):(($2-($3+$4))/$5) title countryName[i] w linespoints ls i
 set out
 
 ###################### Logistic Curve ###############################################333
@@ -129,16 +129,16 @@ x01=x02=x03=x04=x05=x06=x07=x08 = 58.3
 k1=k2=k3=k4=k5=k6=k7=k8=0.2
 set xrange [*:*]
 set yrange [*:*]
-fit l1(x) countryName[1].".csv" u 0:($2>50 ? ($2) :1/0) via L1,k1,x01
-fit l2(x) countryName[2].".csv" u 0:($2>50 ? ($2) :1/0) via L2,k2,x02
-fit l3(x) countryName[3].".csv" u 0:($2>50 ? ($2) :1/0) via L3,k3,x03
-fit l4(x) countryName[4].".csv" u 0:($2>50 ? ($2) :1/0) via L4,k4,x04
-fit l5(x) countryName[5].".csv" u 0:($2>50 ? ($2) :1/0) via L5,k5,x05
-fit l6(x) countryName[6].".csv" u 0:($2>50 ? ($2) :1/0) via L6,k6,x06
+fit l1(x) "data/".countryName[1].".csv" u 0:($2>50 ? ($2) :1/0) via L1,k1,x01
+fit l2(x) "data/".countryName[2].".csv" u 0:($2>50 ? ($2) :1/0) via L2,k2,x02
+fit l3(x) "data/".countryName[3].".csv" u 0:($2>50 ? ($2) :1/0) via L3,k3,x03
+fit l4(x) "data/".countryName[4].".csv" u 0:($2>50 ? ($2) :1/0) via L4,k4,x04
+fit l5(x) "data/".countryName[5].".csv" u 0:($2>50 ? ($2) :1/0) via L5,k5,x05
+fit l6(x) "data/".countryName[6].".csv" u 0:($2>50 ? ($2) :1/0) via L6,k6,x06
 
 
 set term post eps color enhanced size 3,4
-set out "logistic-curve.eps"
+set out "plots/logistic-curve.eps"
 set xrange [-25:25]
 set yrange [0:450]
 #set title "Logisitc curve"
@@ -148,12 +148,12 @@ set multiplot
 #m_max=0
 set ylabel "total infections /1000"
 @MARGINS_1
-p countryName[1].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title countryName[1] w p ls 1,l1(x+m_max)*1e-3 notitle w l ls 1,\
-  countryName[2].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title countryName[2] w p ls 2,l2(x+m_max)*1e-3 notitle w l ls 2,\
-  countryName[3].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title countryName[3] w p ls 3,l3(x+m_max)*1e-3 notitle w l ls 3,\
-  countryName[4].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title countryName[4] w p ls 4,l4(x+m_max)*1e-3 notitle w l ls 4,\
-  countryName[5].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title countryName[5] w p ls 5,l5(x+m_max)*1e-3 notitle w l ls 5,\
-  countryName[6].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title countryName[6] w p ls 6,l6(x+m_max)*1e-3 notitle w l ls 6
+p "data/".countryName[1].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title countryName[1] w p ls 1,l1(x+m_max)*1e-3 notitle w l ls 1,\
+  "data/".countryName[2].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title countryName[2] w p ls 2,l2(x+m_max)*1e-3 notitle w l ls 2,\
+  "data/".countryName[3].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title countryName[3] w p ls 3,l3(x+m_max)*1e-3 notitle w l ls 3,\
+  "data/".countryName[4].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title countryName[4] w p ls 4,l4(x+m_max)*1e-3 notitle w l ls 4,\
+  "data/".countryName[5].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title countryName[5] w p ls 5,l5(x+m_max)*1e-3 notitle w l ls 5,\
+  "data/".countryName[6].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title countryName[6] w p ls 6,l6(x+m_max)*1e-3 notitle w l ls 6
 
 set xrange [-30:*]
 set yrange [*:*]
@@ -166,12 +166,12 @@ p dl1(x+x01)*1e-3 title countryName[1] w l ls 1,\
   dl4(x+x04)*1e-3 title countryName[4] w l ls 4,\
   dl5(x+x05)*1e-3 title countryName[5] w l ls 5,\
   dl6(x+x06)*1e-3 title countryName[6] w l ls 6,\
-  countryName[1].'.csv' u ($0-x01):(dinc($2)*1e-3) notitle countryName[1] w p ls 1,\
-  countryName[2].'.csv' u ($0-x02):(dinc($2)*1e-3) notitle countryName[2] w p ls 2,\
-  countryName[3].'.csv' u ($0-x03):(dinc($2)*1e-3) notitle countryName[3] w p ls 3,\
-  countryName[4].'.csv' u ($0-x04):(dinc($2)*1e-3) notitle countryName[4] w p ls 4,\
-  countryName[5].'.csv' u ($0-x05):(dinc($2)*1e-3) notitle countryName[5] w p ls 5,\
-  countryName[6].'.csv' u ($0-x06):(dinc($2)*1e-3) notitle countryName[6] w p ls 6
+  "data/".countryName[1].'.csv' u ($0-x01):(dinc($2)*1e-3) notitle countryName[1] w p ls 1,\
+  "data/".countryName[2].'.csv' u ($0-x02):(dinc($2)*1e-3) notitle countryName[2] w p ls 2,\
+  "data/".countryName[3].'.csv' u ($0-x03):(dinc($2)*1e-3) notitle countryName[3] w p ls 3,\
+  "data/".countryName[4].'.csv' u ($0-x04):(dinc($2)*1e-3) notitle countryName[4] w p ls 4,\
+  "data/".countryName[5].'.csv' u ($0-x05):(dinc($2)*1e-3) notitle countryName[5] w p ls 5,\
+  "data/".countryName[6].'.csv' u ($0-x06):(dinc($2)*1e-3) notitle countryName[6] w p ls 6
 
 unset multiplot
 set out
@@ -192,15 +192,15 @@ kr1=kr2=kr3=kr4=kr5=kr6=kr7=kr8=0.2
 set xrange [*:*]
 set yrange [*:*]
 
-fit lr1(x) "country1.csv" u 0:($2>50 ? ($2) :1/0) via m1,n1,kr1,xr01
-fit lr2(x) "country2.csv" u 0:($2>50 ? ($2) :1/0) via m2,n2,kr2,xr02
-fit lr3(x) "country3.csv" u 0:($2>50 ? ($2) :1/0) via m3,n3,kr3,xr03
-fit lr4(x) "country4.csv" u 0:($2>50 ? ($2) :1/0) via m4,n4,kr4,xr04
-fit lr5(x) "country5.csv" u 0:($2>50 ? ($2) :1/0) via m5,n5,kr5,xr05
-fit lr6(x) "country6.csv" u 0:($2>50 ? ($2) :1/0) via m6,n6,kr6,xr06
+fit lr1(x) "data/country1.csv" u 0:($2>50 ? ($2) :1/0) via m1,n1,kr1,xr01
+fit lr2(x) "data/country2.csv" u 0:($2>50 ? ($2) :1/0) via m2,n2,kr2,xr02
+fit lr3(x) "data/country3.csv" u 0:($2>50 ? ($2) :1/0) via m3,n3,kr3,xr03
+fit lr4(x) "data/country4.csv" u 0:($2>50 ? ($2) :1/0) via m4,n4,kr4,xr04
+fit lr5(x) "data/country5.csv" u 0:($2>50 ? ($2) :1/0) via m5,n5,kr5,xr05
+fit lr6(x) "data/country6.csv" u 0:($2>50 ? ($2) :1/0) via m6,n6,kr6,xr06
 
 set term post eps color enhanced size 3,4
-set out "logistic-linear.eps"
+set out "plots/logistic-linear.eps"
 set xrange [-25:25]
 set yrange [0:450]
 #set title "Logisitc curve"
@@ -210,12 +210,12 @@ set multiplot
 #m_max=0
 set ylabel "total infections /1000"
 @MARGINS_1
-p "country1.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country1" w p ls 1,lr1(x+m_max)*1e-3 notitle w l ls 1,\
-  "country2.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country2" w p ls 2,lr2(x+m_max)*1e-3 notitle w l ls 2,\
-  "country3.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country3" w p ls 3,lr3(x+m_max)*1e-3 notitle w l ls 3,\
-  "country4.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country4" w p ls 4,lr4(x+m_max)*1e-3 notitle w l ls 4,\
-  "country5.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country5" w p ls 5,lr5(x+m_max)*1e-3 notitle w l ls 5,\
-  "country6.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country6" w p ls 6,lr6(x+m_max)*1e-3 notitle w l ls 6
+p "data/country1.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country1" w p ls 1,lr1(x+m_max)*1e-3 notitle w l ls 1,\
+  "data/country2.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country2" w p ls 2,lr2(x+m_max)*1e-3 notitle w l ls 2,\
+  "data/country3.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country3" w p ls 3,lr3(x+m_max)*1e-3 notitle w l ls 3,\
+  "data/country4.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country4" w p ls 4,lr4(x+m_max)*1e-3 notitle w l ls 4,\
+  "data/country5.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country5" w p ls 5,lr5(x+m_max)*1e-3 notitle w l ls 5,\
+  "data/country6.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country6" w p ls 6,lr6(x+m_max)*1e-3 notitle w l ls 6
 
 dlr1(x) = (m1**2*(1+exp(-kr1*(x-xr01))) + kr1*(n1+m1**2*x)*exp(-kr1*(x-xr01)))/(1+exp(-kr1*(x-xr01)))**2 
 dlr2(x) = (m2**2*(1+exp(-kr2*(x-xr02))) + kr2*(n2+m2**2*x)*exp(-kr2*(x-xr02)))/(1+exp(-kr2*(x-xr02)))**2 
@@ -237,12 +237,12 @@ p dlr1(x+m_max)*1e-3 title "country1" w l ls 1,\
   dlr4(x+m_max)*1e-3 title "country4" w l ls 4,\
   dlr5(x+m_max)*1e-3 title "country5" w l ls 5,\
   dlr6(x+m_max)*1e-3 title "country6" w l ls 6,\
-  'country1.csv' u ($0-m_max):(dinc($2)*1e-3) notitle "country1" w p ls 1,\
-  'country2.csv' u ($0-m_max):(dinc($2)*1e-3) notitle "country2" w p ls 2,\
-  'country3.csv' u ($0-m_max):(dinc($2)*1e-3) notitle "country3" w p ls 3,\
-  'country4.csv' u ($0-m_max):(dinc($2)*1e-3) notitle "country4" w p ls 4,\
-  'country5.csv' u ($0-m_max):(dinc($2)*1e-3) notitle "country5" w p ls 5,\
-  'country6.csv' u ($0-m_max):(dinc($2)*1e-3) notitle "country6" w p ls 6
+  'data/country1.csv' u ($0-m_max):(dinc($2)*1e-3) notitle "country1" w p ls 1,\
+  'data/country2.csv' u ($0-m_max):(dinc($2)*1e-3) notitle "country2" w p ls 2,\
+  'data/country3.csv' u ($0-m_max):(dinc($2)*1e-3) notitle "country3" w p ls 3,\
+  'data/country4.csv' u ($0-m_max):(dinc($2)*1e-3) notitle "country4" w p ls 4,\
+  'data/country5.csv' u ($0-m_max):(dinc($2)*1e-3) notitle "country5" w p ls 5,\
+  'data/country6.csv' u ($0-m_max):(dinc($2)*1e-3) notitle "country6" w p ls 6
 
 unset multiplot
 set out
