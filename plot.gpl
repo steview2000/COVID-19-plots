@@ -63,7 +63,7 @@ COL_Number = 1
 ROW_Number = 2
 
 left_margin=0.15
-load 'multi.gnu'
+load 'multi.gpl'
 
 set multiplot
 set yrange [50:700000]

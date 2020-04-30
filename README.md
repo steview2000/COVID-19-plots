@@ -1,5 +1,25 @@
+iter      chisq       delta/lim  lambda   L6            k6            x06          
 
+After 18 iterations the fit converged.
+final sum of squares of residuals : 2.6493e+10
+rel. change during last iteration : -3.53687e-06
 
+degrees of freedom    (FIT_NDF)                        : 63
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 20506.7
+variance of residuals (reduced chisquare) = WSSR/ndf   : 4.20524e+08
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+L6              = 1.1009e+06       +/- 2.026e+04    (1.84%)
+k6              = 0.132787         +/- 0.003799     (2.861%)
+x06             = 81.1271          +/- 0.3856       (0.4753%)
+
+correlation matrix of the fit parameters:
+                L6     k6     x06    
+L6              1.000 
+k6             -0.831  1.000 
+x06             0.944 -0.796  1.000 
+"/dev/fd/63" line 146: Cannot open script file 'multi.gnu'
 
 # COVID-19-plots
 
@@ -7,7 +27,7 @@ Here is some regularly updated analysis of the COVID-19 outbreak.
 
 Data from: https://github.com/CSSEGISandData/COVID-19
 
- *UPDATED: Mon 27 Apr 2020 10:49:32 AM CEST*
+ *UPDATED: Thu 30 Apr 2020 09:16:22 AM CEST*
 
 Data are provided for number of the number of _cumulated infected_, _recovered_ and _deceased_ patients.
 
@@ -33,55 +53,9 @@ We see in the top figure, the infection data for 6 different countries. Most of 
 straight lines over the entire range. We calculate the relative infection rate from smoothed and
 interpolated infection data in order to remove the scatter of the data. 
 
-*Infection rates doubled in :*
-|Country | days until doubling of infections| 
-| --- | --- |
-|germany |77.80 days|
-|italy |56.81 days|
-|spain |45.09 days|
-|france |118.39 days|
-|sweden |23.77 days|
-|us |21.88 days|
+_doubling_table
 
-
-## Logisitc function
-The number of infected agents during a pandemic often follow a [logistic function](https://en.wikipedia.org/wiki/Logistic_function).
-The number of infected agents increases initially exponentially, as long as most of the population
-is not infected yet. When the infection rate increases, it will be more difficult for the virus to
-find fresh (not infected) hosts and the slope of the curve decreases. The curve reaches its
-inflection point when roughly half of the population is infected and after finally reaches
-asymptotically a constant value, i.e., uninfected hosts are so rare that the virus can no longer
-spread. 
-
-The COVID-19 pandemic is however different, as the infection rates are not so much controlled by the
-progress of the infections, but rather by the measures the societies are taken to slow down the
-outbreak. Nevertheless, fitting a logisitic function to the data might help to detect changes in the
-spreading rate and hence whether measures are working.
-
-![Logistic Curve](plots/logistic-curve.png)
-
-Top: Data with logistic curve fits. 
-Bottom: The derivative of the logistic curve (i.e., the daily increases) as lines, and the real
-increases as data points.
-
-*Max expected total infections:*
-|Country | total | in persons per million | 
-| --- | ---- | ---- |
-|germany| 154875 +/- 1249| 1866.0 +/- 15.1|
-|italy| 195630 +/- 2470| 3260.5 +/- 41.2|
-|spain| 218974 +/- 3208| 4659.0 +/- 68.3|
-|france| 181473 +/- 4029| 2708.6 +/- 60.1|
-|sweden| 23626 +/- 561| 2362.7 +/- 56.1|
-|us| 1025579 +/- 19393| 3126.8 +/- 59.1|
-
-
-## Another fit
-
-As pointed out, the logisitc function represents the data well only, when no interventions are
-taken place, or under a complete shutdown. However, it is likely that certain societies decide to
-accept a slow, constant increase of cases, small enough for the health systems to deal with. Many
-countries, including South Korea show a slow linear increase of the accumulated infections.
-Therefore, we also try a fit of the function: I(t) = (a+b*t)/(1+exp(-c*t)) 
-
-![Logist-linear](plots/logistic-linear.png)
-
+*Please not that I have removed the logistic fits, as they are at this point of the pandemic not
+very useful. The logistic curve only models the pandemic well when no measures
+are taken. The measures that were taken and the change of the restrictions makes a good long term
+projection impossible and we therefore refrain from doing so.*
