@@ -1,25 +1,5 @@
-iter      chisq       delta/lim  lambda   L6            k6            x06          
 
-After 18 iterations the fit converged.
-final sum of squares of residuals : 2.6493e+10
-rel. change during last iteration : -3.53687e-06
 
-degrees of freedom    (FIT_NDF)                        : 63
-rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 20506.7
-variance of residuals (reduced chisquare) = WSSR/ndf   : 4.20524e+08
-
-Final set of parameters            Asymptotic Standard Error
-=======================            ==========================
-L6              = 1.1009e+06       +/- 2.026e+04    (1.84%)
-k6              = 0.132787         +/- 0.003799     (2.861%)
-x06             = 81.1271          +/- 0.3856       (0.4753%)
-
-correlation matrix of the fit parameters:
-                L6     k6     x06    
-L6              1.000 
-k6             -0.831  1.000 
-x06             0.944 -0.796  1.000 
-"/dev/fd/63" line 146: Cannot open script file 'multi.gnu'
 
 # COVID-19-plots
 
@@ -27,7 +7,7 @@ Here is some regularly updated analysis of the COVID-19 outbreak.
 
 Data from: https://github.com/CSSEGISandData/COVID-19
 
- *UPDATED: Thu 30 Apr 2020 09:16:22 AM CEST*
+ *UPDATED: Thu 30 Apr 2020 09:18:08 AM CEST*
 
 Data are provided for number of the number of _cumulated infected_, _recovered_ and _deceased_ patients.
 
@@ -53,7 +33,16 @@ We see in the top figure, the infection data for 6 different countries. Most of 
 straight lines over the entire range. We calculate the relative infection rate from smoothed and
 interpolated infection data in order to remove the scatter of the data. 
 
-_doubling_table
+*Infection rates doubled in :*
+|Country | days until doubling of infections| 
+| --- | --- |
+|germany |76.61 days|
+|italy |67.00 days|
+|spain |39.50 days|
+|france |-224.05 days|
+|sweden |20.89 days|
+|us |26.91 days|
+
 
 *Please not that I have removed the logistic fits, as they are at this point of the pandemic not
 very useful. The logistic curve only models the pandemic well when no measures

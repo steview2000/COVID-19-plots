@@ -143,7 +143,7 @@ set xrange [-25:25]
 set yrange [0:450]
 #set title "Logisitc curve"
 h_gap=0.1
-load 'multi.gnu'
+load 'multi.gpl'
 set multiplot
 #m_max=0
 set ylabel "total infections /1000"
@@ -207,7 +207,7 @@ set xrange [-25:25]
 set yrange [0:450]
 #set title "Logisitc curve"
 h_gap=0.1
-load 'multi.gnu'
+load 'multi.gpl'
 set multiplot
 #m_max=0
 set key t r
