@@ -7,7 +7,7 @@ Here is some regularly updated analysis of the COVID-19 outbreak.
 
 Data from: https://github.com/CSSEGISandData/COVID-19
 
- *UPDATED: Wed 13 May 2020 09:03:12 AM CEST*
+ *UPDATED: Thu 14 May 2020 10:13:41 AM CEST*
 
 Data are provided for number of the number of _cumulated infected_, _recovered_ and _deceased_ patients.
 
@@ -36,12 +36,12 @@ interpolated infection data in order to remove the scatter of the data.
 *Infection rates doubled in :*
 |Country | days until doubling of infections| 
 | --- | --- |
-|germany |195.36 days|
-|italy |129.81 days|
-|spain |124.04 days|
-|france |200.83 days|
-|sweden |35.88 days|
-|us |45.18 days|
+|germany |146.92 days|
+|italy |150.18 days|
+|spain |187.88 days|
+|france |1100.12 days|
+|sweden |31.62 days|
+|us |45.32 days|
 
 
 *Please note that I have removed the logistic fits, as they are at this point of the pandemic not
