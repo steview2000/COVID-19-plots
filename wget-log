@@ -1,0 +1,11 @@
+--2021-03-02 22:45:54--  https://services7.arcgis.com/mOBPykOjAyBO2ZKk/arcgis/rest/services/Coronaf%C3%A4lle_in_den_Bundesl%C3%A4ndern/FeatureServer/0/query?outFields=*
+Resolving services7.arcgis.com (services7.arcgis.com)... 143.204.209.121, 143.204.209.11, 143.204.209.110, ...
+Connecting to services7.arcgis.com (services7.arcgis.com)|143.204.209.121|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 9395 (9.2K)
+Saving to: ‘query?outFields=*’
+
+query?outFields=*                                  0%[                                                                                                        ]       0  --.-KB/s               query?outFields=*                                100%[=======================================================================================================>]   9.17K  --.-KB/s    in 0s      
+
+2021-03-02 22:45:54 (268 MB/s) - ‘query?outFields=*’ saved [9395/9395]
+
