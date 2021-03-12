@@ -8,8 +8,8 @@ dinc(x) = (vD = (x-old), old = x, vD)
 av7(x) = (s7 = (x1+x2+x3+x4+x5+x6+x)/7,x6=x5,x5=x4,x4=x3,x3=x2,x2=x1,x1=x,s7)
 
 #deriv1(x,y) = (vD1 = 2*(y-old_y1)/((x-old_x1)*(old_y1+y)), old_y1 = y, old_x1 = x, vD1)
-x1 = x2 =x3 =x4 =x5 =x6 =NaN
-y1 = y2 =y3 =y4 =y5 =y6 =NaN
+x1 = x2 =x3 =x4 =x5 =x6 =x7=0.0
+y1 = y2 =y3 =y4 =y5 =y6 =x7=0.0
 
 old=0.0
 
@@ -28,14 +28,15 @@ right_margin=0.03
 load 'multi.gpl'
 
 set xlabel ""
-set ylabel "daily cases"
+set ylabel "weekly cases per 100,000 inhabitants"
 set xrange ["3/01/20":*]
 set key top left
 set xtics autofreq rotate by 45 offset -3,-3
 ############### Infections #######################################
 @MARGINS_1
-p 'data/germany.csv' u 1:(dinc($2)) notitle w p ls 3,\
-                  '' u 1:((av7(dinc($2)))) title "Germany" w l ls 2
+p 'data/germany.csv' u 1:(7*av7(dinc($2))/(10*$5)) title "Germany" w l lt 1 lc "red",\
+  'data/israel.csv' u 1:(7*av7(dinc($2))/(10*$5)) title "Israel" w l lt 1 lc "blue",\
+  'data/sweden.csv' u 1:(7*av7(dinc($2))/(10*$5)) title "Sweden" w l lt 1 lc "green",\
 
 ############### Impfzahlen #######################################
 @sep ","

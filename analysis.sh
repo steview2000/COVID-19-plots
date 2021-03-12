@@ -53,7 +53,7 @@ create_all_col iran 1     | awk -F, '{print $1,$2,$3,$4,83}'  > data/iran.csv
 create_all_col uk 1       | awk -F, '{print $1,$2,$3,$4,67}'  > data/uk.csv
 create_all_col us 1       | awk -F, '{print $1,$2,$3,$4,328}' > data/us.csv
 create_all_col sweden 1   | awk -F, '{print $1,$2,$3,$4,10}'  > data/sweden.csv
-create_all_col israel 1   | awk -F, '{print $1,$2,$3,$4,12}'  > data/israel.csv
+create_all_col israel 1   | awk -F, '{print $1,$2,$3,$4,9.3}'  > data/israel.csv
 
 ## Download Tests
 echo "#" >Testzahlen-gesamt.csv
