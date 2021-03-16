@@ -1,278 +1,59 @@
 #!/usr/bin/gnuplot -persist
+load 'beauty.gnu'
 
-set fit errorvariables
+set timefmt "%m/%d/%y"
+set xdata time
 
-array countryName[6]
-countryName[1] = "country1"
-countryName[2] = "country2"
-countryName[3] = "country3"
-countryName[4] = "country4"
-countryName[5] = "country5"
-countryName[6] = "country6"
+dinc(x) = (vD = (x-old), old = x, vD)
+av7(x) = (s7 = (x1+x2+x3+x4+x5+x6+x)/7,x6=x5,x5=x4,x4=x3,x3=x2,x2=x1,x1=x,s7)
 
-dinc(x) = (vD = (x-old_x), old_x = x, vD)
+#deriv1(x,y) = (vD1 = 2*(y-old_y1)/((x-old_x1)*(old_y1+y)), old_y1 = y, old_x1 = x, vD1)
+x1 = x2 =x3 =x4 =x5 =x6 =x7=0.0
+y1 = y2 =y3 =y4 =y5 =y6 =x7=0.0
 
-
-#array vD_a[6]
-#array old_x_a[6]
-#array old_y_a[6]
-#old_x = old_x_a[1] = old_x_a[2] =old_x_a[3] =old_x_a[4] =old_x_a[5] =old_x_a[6] =NaN
-#old_y = old_y_a[1] = old_y_a[2] =old_y_a[3] =old_y_a[4] =old_y_a[5] =old_y_a[6] =NaN
-#
-#deriv(x,y,i) = (old_x = old_x_a[i],\
-#				old_y = old_y_a[i],\
-#                vD = 2*(y-old_y)/((x-old_x)*(old_y+y)), \
-#                old_y = y, \
-#				old_x = x, \
-#				vD_a[i]=vD)
-
-deriv1(x,y) = (vD1 = 2*(y-old_y1)/((x-old_x1)*(old_y1+y)), old_y1 = y, old_x1 = x, vD1)
-deriv2(x,y) = (vD2 = 2*(y-old_y2)/((x-old_x2)*(old_y2+y)), old_y2 = y, old_x2 = x, vD2)
-deriv3(x,y) = (vD3 = 2*(y-old_y3)/((x-old_x3)*(old_y3+y)), old_y3 = y, old_x3 = x, vD3)
-deriv4(x,y) = (vD4 = 2*(y-old_y4)/((x-old_x4)*(old_y4+y)), old_y4 = y, old_x4 = x, vD4)
-deriv5(x,y) = (vD5 = 2*(y-old_y5)/((x-old_x5)*(old_y5+y)), old_y5 = y, old_x5 = x, vD5)
-deriv6(x,y) = (vD6 = 2*(y-old_y6)/((x-old_x6)*(old_y6+y)), old_y6 = y, old_x6 = x, vD6)
-old_x = old_x1 = old_x2 =old_x3 =old_x4 =old_x5 =old_x6 =NaN
-old_y = old_y1 = old_y2 =old_y3 =old_y4 =old_y5 =old_y6 =NaN
+old=0.0
 
 set xrange [*:*]
 set yrange [*:*]
 
-array m[6]
-array popul[6]
-do for [i=1:6]{
- # get some statistics
- stats "data/".countryName[i].".csv" u 5:($2>50 ? ($0) :1/0) nooutput
- m[i]=STATS_min_y
- popul[i]=STATS_min_x
- m_max =STATS_max_y
- 
- # make some smooth curves
- set table "/tmp/".countryName[i].".csv"
- p "data/".countryName[i].".csv" u 0:(log($2)) smooth bezier
-}
-unset table
-
-set key b r    
-set xrange [30-m_max:1]
-set logscale y
-set term post eps color enhanced size 3,4
-set out "plots/poly-exp-fit.eps"
-
-COL_Number = 1
-ROW_Number = 2
-
-left_margin=0.15
-load 'multi.gpl'
+set term post eps enhanced color size 4.5,7
+set out "plot.eps"
 
 set multiplot
-set yrange [50:700000]
-set xrange [-40:2]
-set format x ""
-set format y "10^{%L}"
-set ylabel "cumulative infections"
-@MARGINS_1
-p for [i=1:6] "data/".countryName[i].".csv" u ($0-m_max):($2>50 ? ($2) :1/0) title countryName[i] w p ls i
-
-#unset logscale y
-set key t r
-set yrange [0.01:*]
-set ylabel "relative infection rates [1/day]"
-#unset logscale y
-set format x "%g"
-set format y "%g"
-set xlabel "Days ago"
-@MARGINS_2
-p  "/tmp/".countryName[1].".csv" u ($1-m_max):($1 >m[1] ? deriv1($1,exp($2)): 1/0) title countryName[1] w l ls 1 ,\
-   "/tmp/".countryName[2].".csv" u ($1-m_max):($1 >m[2] ? deriv2($1,exp($2)): 1/0) title countryName[2] w l ls 2 ,\
-   "/tmp/".countryName[3].".csv" u ($1-m_max):($1 >m[3] ? deriv3($1,exp($2)): 1/0) title countryName[3] w l ls 3 ,\
-   "/tmp/".countryName[4].".csv" u ($1-m_max):($1 >m[4] ? deriv4($1,exp($2)): 1/0) title countryName[4] w l ls 4 ,\
-   "/tmp/".countryName[5].".csv" u ($1-m_max):($1 >m[5] ? deriv5($1,exp($2)): 1/0) title countryName[5] w l ls 5 ,\
-   "/tmp/".countryName[6].".csv" u ($1-m_max):($1 >m[6] ? deriv6($1,exp($2)): 1/0) title countryName[6] w l ls 6 
-
-unset multiplot
-set out
-
-###################### Currently sick ###############################################333
-set term post eps color enhanced size 3,2.5
-unset logscale y
-set key t l
-set ylabel "currently sick (ppm)"
-set tmargin -1
-set bmargin -1
-set out "plots/curr-sick.eps"
-p for [i=1:6] "data/".countryName[i].".csv" u ($0-m_max):(($2-($3+$4))/$5) title countryName[i] w linespoints ls i
-set out
-
-###################### Logistic Curve ###############################################333
-
-# function to calculate the daily increase
-
-l1(x) = L1/(1+exp(-k1*(x-x01)))
-l2(x) = L2/(1+exp(-k2*(x-x02)))
-l3(x) = L3/(1+exp(-k3*(x-x03)))
-l4(x) = L4/(1+exp(-k4*(x-x04)))
-l5(x) = L5/(1+exp(-k5*(x-x05)))
-l6(x) = L6/(1+exp(-k6*(x-x06)))
-
-# The derivatives
-dl1(x) = k1*L1*exp(-k1*(x-x01))*(1+exp(-k1*(x-x01)))**(-2) 
-dl2(x) = k2*L2*exp(-k2*(x-x02))*(1+exp(-k2*(x-x02)))**(-2) 
-dl3(x) = k3*L3*exp(-k3*(x-x03))*(1+exp(-k3*(x-x03)))**(-2) 
-dl4(x) = k4*L4*exp(-k4*(x-x04))*(1+exp(-k4*(x-x04)))**(-2) 
-dl5(x) = k5*L5*exp(-k5*(x-x05))*(1+exp(-k5*(x-x05)))**(-2) 
-dl6(x) = k6*L6*exp(-k6*(x-x06))*(1+exp(-k6*(x-x06)))**(-2) 
-
-
-L1=L2=L3=L4=L5=L6=L7=L8 = 80000
-x01=x02=x03=x04=x05=x06=x07=x08 = 58.3
-k1=k2=k3=k4=k5=k6=k7=k8=0.2
-set xrange [*:*]
-set yrange [*:*]
-fit l1(x) "data/".countryName[1].".csv" u 0:($2>50 ? ($2) :1/0) via L1,k1,x01
-fit l2(x) "data/".countryName[2].".csv" u 0:($2>50 ? ($2) :1/0) via L2,k2,x02
-fit l3(x) "data/".countryName[3].".csv" u 0:($2>50 ? ($2) :1/0) via L3,k3,x03
-fit l4(x) "data/".countryName[4].".csv" u 0:($2>50 ? ($2) :1/0) via L4,k4,x04
-fit l5(x) "data/".countryName[5].".csv" u 0:($2>50 ? ($2) :1/0) via L5,k5,x05
-fit l6(x) "data/".countryName[6].".csv" u 0:($2>50 ? ($2) :1/0) via L6,k6,x06
-
-
-set term post eps color enhanced size 3,4
-set out "plots/logistic-curve.eps"
-set xrange [-25:25]
-set yrange [0:450]
-#set title "Logisitc curve"
+ROW_Number=2
+COL_Number=1
 h_gap=0.1
+left_margin=0.14
+right_margin=0.03
+top_margin=0.05
 load 'multi.gpl'
-set multiplot
-#m_max=0
-set ylabel "total infections /1000"
-set key t r
+set label 1 "infections" at screen 0.4,0.97 font ",20"
+set label 2 "vaccination in Germany" at screen 0.2,0.38 font ",20"
+set xlabel ""
+set ylabel "weekly cases per 100,000 inhabitants"
+set xrange ["3/01/20":*]
+set key top left
+set xtics autofreq rotate by 45 offset -3,-3
+set yrange [0:*]
+############### Infections #######################################
 @MARGINS_1
-p "data/".countryName[1].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title countryName[1] w p ls 1,l1(x+m_max)*1e-3 notitle w l ls 1,\
-  "data/".countryName[2].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title countryName[2] w p ls 2,l2(x+m_max)*1e-3 notitle w l ls 2,\
-  "data/".countryName[3].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title countryName[3] w p ls 3,l3(x+m_max)*1e-3 notitle w l ls 3,\
-  "data/".countryName[4].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title countryName[4] w p ls 4,l4(x+m_max)*1e-3 notitle w l ls 4,\
-  "data/".countryName[5].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title countryName[5] w p ls 5,l5(x+m_max)*1e-3 notitle w l ls 5,\
-  "data/".countryName[6].".csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title countryName[6] w p ls 6,l6(x+m_max)*1e-3 notitle w l ls 6
+p 'data/germany.csv' u 1:(7*av7(dinc($2))/(10*$5)) title "Germany" w l lt 1 lc "red",\
+  'data/israel.csv' u 1:(7*av7(dinc($2))/(10*$5)) title "Israel" w l lt 1 lc "blue",\
+  'data/sweden.csv' u 1:(7*av7(dinc($2))/(10*$5)) title "Sweden" w l lt 1 lc "green",\
+  'data/spain.csv' u 1:(7*av7(dinc($2))/(10*$5)) title "Spain" w l lt 1 lc "black"
 
-set xrange [-30:*]
-set yrange [-1:15]
-set ylabel "daily increase /1000"
-set xlabel "days from max increase rate"
-set key t l
-@MARGINS_2
-p dl1(x+x01)*1e-3 title countryName[1] w l ls 1,\
-  dl2(x+x02)*1e-3 title countryName[2] w l ls 2,\
-  dl3(x+x03)*1e-3 title countryName[3] w l ls 3,\
-  dl4(x+x04)*1e-3 title countryName[4] w l ls 4,\
-  dl5(x+x05)*1e-3 title countryName[5] w l ls 5,\
-  dl6(x+x06)*1e-3 title countryName[6] w l ls 6,\
-  "data/".countryName[1].'.csv' u ($0-x01):(dinc($2)*1e-3) notitle countryName[1] w p ls 1,\
-  "data/".countryName[2].'.csv' u ($0-x02):(dinc($2)*1e-3) notitle countryName[2] w p ls 2,\
-  "data/".countryName[3].'.csv' u ($0-x03):(dinc($2)*1e-3) notitle countryName[3] w p ls 3,\
-  "data/".countryName[4].'.csv' u ($0-x04):(dinc($2)*1e-3) notitle countryName[4] w p ls 4,\
-  "data/".countryName[5].'.csv' u ($0-x05):(dinc($2)*1e-3) notitle countryName[5] w p ls 5,\
-  "data/".countryName[6].'.csv' u ($0-x06):(dinc($2)*1e-3) notitle countryName[6] w p ls 6
-
-unset multiplot
-set out
-
-###################### Logistic-linear Curve ###############################################
-
-lr1(x) =(m1**2*x+n1)/(1+exp(-kr1*(x-xr01)))
-lr2(x) =(m2**2*x+n2)/(1+exp(-kr2*(x-xr02)))
-lr3(x) =(m3**2*x+n3)/(1+exp(-kr3*(x-xr03)))
-lr4(x) =(m4**2*x+n4)/(1+exp(-kr4*(x-xr04)))
-lr5(x) =(m5**2*x+n5)/(1+exp(-kr5*(x-xr05)))
-lr6(x) =(m6**2*x+n6)/(1+exp(-kr6*(x-xr06)))
-
-n1=n2=n3=n4=n5=n6=100000.
-m1=m2=m3=m4=m5=m6=10.
-xr01=xr02=xr03=xr04=xr05=xr06=xr07=xr08 = 58.3
-kr1=kr2=kr3=kr4=kr5=kr6=kr7=kr8=0.2
+############### Impfzahlen #######################################
+@sep ","
+set timefmt "%Y-%m-%d"
 set xrange [*:*]
-set yrange [*:*]
-
-fit lr1(x) "data/country1.csv" u 0:($2>50 ? ($2) :1/0) via m1,n1,kr1,xr01
-fit lr2(x) "data/country2.csv" u 0:($2>50 ? ($2) :1/0) via m2,n2,kr2,xr02
-fit lr3(x) "data/country3.csv" u 0:($2>50 ? ($2) :1/0) via m3,n3,kr3,xr03
-fit lr4(x) "data/country4.csv" u 0:($2>50 ? ($2) :1/0) via m4,n4,kr4,xr04
-fit lr5(x) "data/country5.csv" u 0:($2>50 ? ($2) :1/0) via m5,n5,kr5,xr05
-fit lr6(x) "data/country6.csv" u 0:($2>50 ? ($2) :1/0) via m6,n6,kr6,xr06
-
-set term post eps color enhanced size 3,4
-set out "plots/logistic-linear.eps"
-set xrange [-25:25]
-set yrange [0:450]
-#set title "Logisitc curve"
-h_gap=0.1
-load 'multi.gpl'
-set multiplot
-#m_max=0
-set key t r
-set ylabel "total infections /1000"
-@MARGINS_1
-p "data/country1.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country1" w p ls 1,lr1(x+m_max)*1e-3 notitle w l ls 1,\
-  "data/country2.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country2" w p ls 2,lr2(x+m_max)*1e-3 notitle w l ls 2,\
-  "data/country3.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country3" w p ls 3,lr3(x+m_max)*1e-3 notitle w l ls 3,\
-  "data/country4.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country4" w p ls 4,lr4(x+m_max)*1e-3 notitle w l ls 4,\
-  "data/country5.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country5" w p ls 5,lr5(x+m_max)*1e-3 notitle w l ls 5,\
-  "data/country6.csv" u ($0-m_max):($2>50 ? ($2*1e-3) :1/0) title "country6" w p ls 6,lr6(x+m_max)*1e-3 notitle w l ls 6
-
-dlr1(x) = (m1**2*(1+exp(-kr1*(x-xr01))) + kr1*(n1+m1**2*x)*exp(-kr1*(x-xr01)))/(1+exp(-kr1*(x-xr01)))**2 
-dlr2(x) = (m2**2*(1+exp(-kr2*(x-xr02))) + kr2*(n2+m2**2*x)*exp(-kr2*(x-xr02)))/(1+exp(-kr2*(x-xr02)))**2 
-dlr3(x) = (m3**2*(1+exp(-kr3*(x-xr03))) + kr3*(n3+m3**2*x)*exp(-kr3*(x-xr03)))/(1+exp(-kr3*(x-xr03)))**2 
-dlr4(x) = (m4**2*(1+exp(-kr4*(x-xr04))) + kr4*(n4+m4**2*x)*exp(-kr4*(x-xr04)))/(1+exp(-kr4*(x-xr04)))**2 
-dlr5(x) = (m5**2*(1+exp(-kr5*(x-xr05))) + kr5*(n5+m5**2*x)*exp(-kr5*(x-xr05)))/(1+exp(-kr5*(x-xr05)))**2 
-dlr6(x) = (m6**2*(1+exp(-kr6*(x-xr06))) + kr6*(n6+m6**2*x)*exp(-kr6*(x-xr06)))/(1+exp(-kr6*(x-xr06)))**2 
-
-old_v = NaN
-set xrange [-30:25]
-set yrange [-1:30]
-#set xrange [*:*]
-set ylabel "daily increase /1000"
-set xlabel "days from max increase rate"
-unset key
+set ylabel "daily vacination"
+#set boxwidth 0.9
+set style fill solid 0.3
 @MARGINS_2
-p dlr1(x+m_max)*1e-3 title "country1" w l ls 1,\
-  dlr2(x+m_max)*1e-3 title "country2" w l ls 2,\
-  dlr3(x+m_max)*1e-3 title "country3" w l ls 3,\
-  dlr4(x+m_max)*1e-3 title "country4" w l ls 4,\
-  dlr5(x+m_max)*1e-3 title "country5" w l ls 5,\
-  dlr6(x+m_max)*1e-3 title "country6" w l ls 6,\
-  'data/country1.csv' u ($0-m_max):(dinc($2)*1e-3) notitle "country1" w p ls 1,\
-  'data/country2.csv' u ($0-m_max):(dinc($2)*1e-3) notitle "country2" w p ls 2,\
-  'data/country3.csv' u ($0-m_max):(dinc($2)*1e-3) notitle "country3" w p ls 3,\
-  'data/country4.csv' u ($0-m_max):(dinc($2)*1e-3) notitle "country4" w p ls 4,\
-  'data/country5.csv' u ($0-m_max):(dinc($2)*1e-3) notitle "country5" w p ls 5,\
-  'data/country6.csv' u ($0-m_max):(dinc($2)*1e-3) notitle "country6" w p ls 6
+p 'data/impfzahlen.csv' u 1:($2+$3) title "1st vaccination" w boxes lc "green",\
+                  '' u 1:($3) title "1st+2nd vaccination" w boxes lc "blue"
 
 unset multiplot
-set out
+set out 
 
-print ""
-print ""
-print "define(_doubling_table, "
-print sprintf("*Infection rates doubled in :*")
-print sprintf("|Country | days until doubling of infections| ")
-print sprintf("| --- | --- |")
-print sprintf("|country1 |%.2f days|",log(2)/vD1)
-print sprintf("|country2 |%.2f days|",log(2)/vD2)
-print sprintf("|country3 |%.2f days|",log(2)/vD3)
-print sprintf("|country4 |%.2f days|",log(2)/vD4)
-print sprintf("|country5 |%.2f days|",log(2)/vD5)
-print sprintf("|country6 |%.2f days|",log(2)/vD6)
-print ")"
-print ""
-print "define(_logistic_table,"
-print sprintf("*Max expected total infections:*")
-print sprintf("|Country | total | in persons per million | ")
-print sprintf("| --- | ---- | ---- |")
-print sprintf("|country1| %d +/- %.0f| %.1f +/- %.1f|",L1,L1_err,L1/popul[1],L1_err/popul[1])
-print sprintf("|country2| %d +/- %.0f| %.1f +/- %.1f|",L2,L2_err,L2/popul[2],L2_err/popul[2])
-print sprintf("|country3| %d +/- %.0f| %.1f +/- %.1f|",L3,L3_err,L3/popul[3],L3_err/popul[3])
-print sprintf("|country4| %d +/- %.0f| %.1f +/- %.1f|",L4,L4_err,L4/popul[4],L4_err/popul[4])
-print sprintf("|country5| %d +/- %.0f| %.1f +/- %.1f|",L5,L5_err,L5/popul[5],L5_err/popul[5])
-print sprintf("|country6| %d +/- %.0f| %.1f +/- %.1f|",L6,L6_err,L6/popul[6],L6_err/popul[6])
-print ")"
+set term x11
