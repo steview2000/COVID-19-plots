@@ -53,10 +53,10 @@ create_all_col sweden 1   | awk -F, '{print $1,$2,$3,$4,10}'  > data/sweden.csv
 
 gnuplot -p <(sed -e "s/country1/$COUNTRY1/g" -e "s/country2/$COUNTRY2/g" -e "s/country3/$COUNTRY3/g" -e "s/country4/$COUNTRY4/g" -e "s/country5/$COUNTRY5/g" -e "s/country6/$COUNTRY6/g" plot.gpl) 2>gnuout.txt
 ##
-convert -density 300 plots/poly-exp-fit.eps -resize 640 plots/poly-exp-fit.png &
-convert -density 300 plots/curr-sick.eps -resize 640 plots/curr-sick.png &
-convert -density 300 plots/logistic-curve.eps -resize 640 plots/logistic-curve.png &
-convert -density 300 plots/logistic-linear.eps -resize 640 plots/logistic-linear.png
+#convert -density 300 plots/poly-exp-fit.eps -resize 640 plots/poly-exp-fit.png &
+#convert -density 300 plots/curr-sick.eps -resize 640 plots/curr-sick.png &
+#convert -density 300 plots/logistic-curve.eps -resize 640 plots/logistic-curve.png &
+#convert -density 300 plots/logistic-linear.eps -resize 640 plots/logistic-linear.png
 ##
 date_string=$(date)
 cat <(tail -n 23 gnuout.txt) README-raw.md|m4  |sed "/*UPDATED:*/c\ *UPDATED: ${date_string}*"> README.md
