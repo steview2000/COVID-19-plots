@@ -34,11 +34,13 @@ set ylabel "weekly cases per 100,000 inhabitants"
 set xrange ["3/01/20":*]
 set key top left
 set xtics autofreq rotate by 45 offset -3,-3
+set yrange [0:*]
 ############### Infections #######################################
 @MARGINS_1
 p 'data/germany.csv' u 1:(7*av7(dinc($2))/(10*$5)) title "Germany" w l lt 1 lc "red",\
   'data/israel.csv' u 1:(7*av7(dinc($2))/(10*$5)) title "Israel" w l lt 1 lc "blue",\
   'data/sweden.csv' u 1:(7*av7(dinc($2))/(10*$5)) title "Sweden" w l lt 1 lc "green",\
+  'data/spain.csv' u 1:(7*av7(dinc($2))/(10*$5)) title "Spain" w l lt 1 lc "black"
 
 ############### Impfzahlen #######################################
 @sep ","
