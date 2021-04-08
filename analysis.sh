@@ -20,23 +20,23 @@ export DEATH="$HOME/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_s
 export RECOVERED="$HOME/COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv"
 
 #COL_Number=$(csvtool col 122 <(csvtool transpose $CONFIRMED) |tail -n +5 |wc -l)
-function get_dates {
+get_dates(){
 	head -n 1 $CONFIRMED|tr "," "\n"|tail -n +5
 }
 
-function create_confirmed {
+create_confirmed(){
 	grep -i $1 $CONFIRMED |tr "," "\n" |tail -n +5 
 }
 
-function create_recovered {
+create_recovered() {
 	grep -i $1 $RECOVERED |tr "," "\n" |tail -n +5 
 }
 
-function create_deaths {
+create_deaths(){
 	grep -i $1 $DEATH |tr "," "\n" |tail -n +5 
 }
 
-function create_all_col {
+create_all_col() {
 	paste -d "," <(get_dates) <(create_confirmed "$1") <(create_recovered "$1") <(create_deaths "$1")
 }
 # Create the data file:
