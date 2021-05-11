@@ -68,4 +68,4 @@ in2csv --sheet Impfungen_proTag data/impfzahlen.xlsx  > data/impfzahlen.csv
 gnuplot plot.gpl 2>gnuout.txt
 ##
 convert -density 300 plot.eps -resize 640 plot.png &
-
+zathura plot.eps
