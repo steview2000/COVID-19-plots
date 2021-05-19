@@ -1,9 +1,9 @@
-plot.eps: plot.gpl owid-covid-data.csv 
+plot.eps: plot.gpl data/owid-covid-data.csv 
 	gnuplot plot.gpl
 	zathura plot.eps
 
-owid-covid-data.csv: ${HOME}/gpg.log	
-	curl https://covid.ourworldindata.org/data/owid-covid-data.csv >owid-covid-data.csv
+data/owid-covid-data.csv: ${HOME}/gpg.log	
+	curl https://covid.ourworldindata.org/data/owid-covid-data.csv > data/owid-covid-data.csv
 	## Download Tests
 	echo "#" >testzahlen-gesamt.csv
 	curl "https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Testzahlen-gesamt.xlsx?__blob=publicationFile" >data/testzahlen-gesamt.xlsx
