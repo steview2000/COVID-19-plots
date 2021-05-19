@@ -1,5 +1,6 @@
 #!/usr/bin/gnuplot -persist
 load 'beauty.gnu'
+@sep ","
 
 set timefmt "%m/%d/%y"
 set xdata time
@@ -38,12 +39,11 @@ set yrange [0:*]
 ############### Infections #######################################
 @MARGINS_1
 p 'data/germany.csv' u 1:(7*av7(dinc($2))/(10*$5)) title "Germany" w l lt 1 lc "red",\
-  'data/israel.csv' u 1:(7*av7(dinc($2))/(10*$5)) title "Israel" w l lt 1 lc "blue",\
-  'data/sweden.csv' u 1:(7*av7(dinc($2))/(10*$5)) title "Sweden" w l lt 1 lc "green",\
-  'data/spain.csv' u 1:(7*av7(dinc($2))/(10*$5)) title "Spain" w l lt 1 lc "black"
+  'data/israel.csv'  u 1:(7*av7(dinc($2))/(10*$5)) title "Israel" w l lt 1 lc "blue",\
+  'data/sweden.csv'  u 1:(7*av7(dinc($2))/(10*$5)) title "Sweden" w l lt 1 lc "green",\
+  'data/spain.csv'   u 1:(7*av7(dinc($2))/(10*$5)) title "Spain" w l lt 1 lc "black"
 
 ############### Impfzahlen #######################################
-@sep ","
 set timefmt "%Y-%m-%d"
 set xrange [*:*]
 set ylabel "daily vacination"
@@ -55,5 +55,20 @@ p 'data/impfzahlen.csv' u 1:($2+$3) title "1st vaccination" w boxes lc "green",\
 
 unset multiplot
 set out 
+reset
+load '~/.gnuplot'
+@sep ','
+set term x11
+set xdata
+set yrange [0:*]
+set bmargin at screen 0.1
+set tmargin -1
+set lmargin -1
+set rmargin -1
+set ytics nomirror
+set y2tics autofreq
+set y2range [0:100]
+p 'data/germany.csv' u 0:(av7(dinc($2))) axis x1y1 title "Germany" w l lt 1 lc "red",\
+  'data/impfzahlen.csv' u (339+$0+17):(0.0683*av7($4)) axis x1y1 title "1st vaccination" w l lc "green"
 
 set term x11

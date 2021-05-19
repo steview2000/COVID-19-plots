@@ -4,10 +4,9 @@
 CURRENT_PATH=$(pwd)
 
 echo "First get the data ...."
-cd $HOME/COVID-19
-git pull
-cd $CURRENT_PATH
-
+#cd $HOME/COVID-19
+#git pull
+#cd $CURRENT_PATH
 export COUNTRY1=germany
 export COUNTRY2=italy
 export COUNTRY3=spain
@@ -43,29 +42,15 @@ create_all_col() {
 
 #create_recovered korea
 
-create_all_col germany 1  | awk -F, '{print $1,$2,$3,$4,83}'  > data/germany.csv
-create_all_col italy 1    | awk -F, '{print $1,$2,$3,$4,60}'  > data/italy.csv
-create_all_col france 1   | awk -F, '{print $1,$2,$3,$4,67}'  > data/france.csv
-create_all_col spain 1    | awk -F, '{print $1,$2,$3,$4,47}'  > data/spain.csv
-create_all_col korea 2    | awk -F, '{print $1,$2,$3,$4,77}'  > data/korea.csv
-create_all_col malaysia 1 | awk -F, '{print $1,$2,$3,$4,33}'  > data/malaysia.csv
-create_all_col iran 1     | awk -F, '{print $1,$2,$3,$4,83}'  > data/iran.csv
-create_all_col uk 1       | awk -F, '{print $1,$2,$3,$4,67}'  > data/uk.csv
-create_all_col us 1       | awk -F, '{print $1,$2,$3,$4,328}' > data/us.csv
-create_all_col sweden 1   | awk -F, '{print $1,$2,$3,$4,10}'  > data/sweden.csv
-create_all_col israel 1   | awk -F, '{print $1,$2,$3,$4,9.3}'  > data/israel.csv
+create_all_col germany 1  | awk -F, '{print $1","$2","$3","$4","83}'  > data/germany.csv
+create_all_col italy 1    | awk -F, '{print $1","$2","$3","$4","60}'  > data/italy.csv
+create_all_col france 1   | awk -F, '{print $1","$2","$3","$4","67}'  > data/france.csv
+create_all_col spain 1    | awk -F, '{print $1","$2","$3","$4","47}'  > data/spain.csv
+create_all_col korea 2    | awk -F, '{print $1","$2","$3","$4","77}'  > data/korea.csv
+create_all_col malaysia 1 | awk -F, '{print $1","$2","$3","$4","33}'  > data/malaysia.csv
+create_all_col iran 1     | awk -F, '{print $1","$2","$3","$4","83}'  > data/iran.csv
+create_all_col uk 1       | awk -F, '{print $1","$2","$3","$4","67}'  > data/uk.csv
+create_all_col us 1       | awk -F, '{print $1","$2","$3","$4","328}' > data/us.csv
+create_all_col sweden 1   | awk -F, '{print $1","$2","$3","$4","10}'  > data/sweden.csv
+create_all_col israel 1   | awk -F, '{print $1","$2","$3","$4","9.3}'  > data/israel.csv
 
-## Download Tests
-echo "#" >Testzahlen-gesamt.csv
-curl "https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Testzahlen-gesamt.xlsx?__blob=publicationFile" >data/testzahlen-gesamt.xlsx
-in2csv --sheet 1_Testzahlerfassung data/Testzahlen-gesamt.xlsx > data/testzahlen-gesamt.csv
-
-## Download Impfungen
-curl "https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Impfquotenmonitoring.xlsx?__blob=publicationFile" > data/impfzahlen.xlsx
-in2csv --sheet Impfungen_proTag data/impfzahlen.xlsx  > data/impfzahlen.csv
-
-#gnuplot -p plot.gpl
-gnuplot plot.gpl 2>gnuout.txt
-##
-convert -density 300 plot.eps -resize 640 plot.png &
-zathura plot.eps
